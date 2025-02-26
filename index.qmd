@@ -1,5 +1,5 @@
 ---
-title: "rschblog"
+title: "Research Blog"
 listing:
   contents: posts
   sort: "date desc"
@@ -12,7 +12,5 @@ title-block-banner: true
 ---
 
 ```{r}
-install.packages("knitr")
-install.packages("rmarkdown")
 
 ```
