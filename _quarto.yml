@@ -4,12 +4,19 @@ project:
 website:
   title: "Research Blog"
   navbar:
+    left:
+      - text: "About"
+        href: about.qmd
+      - text: "CV"
+        href: CV_PalosS.pdf  
     right:
-      - about.qmd
+      - icon: Blue Sky
+        href: "https://bsky.app/profile/saratessa.bsky.social"
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: "https://github.com/saratessa"
+  page-footer:
+    center: "© 2025 Saratessa Palos | Powered by Quarto"
+    
 format:
   html:
     theme: cosmo
