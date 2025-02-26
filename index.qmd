@@ -10,3 +10,9 @@ listing:
 page-layout: full
 title-block-banner: true
 ---
+
+```{r}
+install.packages("knitr")
+install.packages("rmarkdown")
+
+```
