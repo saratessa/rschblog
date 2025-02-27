@@ -1,1 +1,15 @@
 /* css styles */
+/* Make profile picture square */
+.profile-picture {
+    border-radius: 0; /* Removes circular effect */
+    width: 150px; /* Adjust size as needed */
+    height: 150px; /* Ensures square shape */
+    object-fit: cover; /* Keeps the image properly sized */
+}
+
+/* Align text to the left */
+.about-text {
+    text-align: left;
+    max-width: 700px; /* Optional: limits width for better readability */
+    margin: 0 auto; /* Keeps it centered within a readable width */
+}
