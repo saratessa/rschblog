@@ -1,83 +1,166 @@
 ---
-title: "Math Pinpoint Correlation Analysis"
+title: "Exploring PT Math pinpoints"
 author: "Saratessa"
 date: "2025-02-27"
-categories: [Precision Teaching, Math Instruction, Clustering & PCA]
+categories: [Precision Teaching, Math Instruction, Clustering]
 ---
 
-The first step I took was to load all required R packages. For data manipulation (`tidyverse`), reading Excel files (`readxl`), cleaning column names (`janitor`), performing Principal Component Analysis (`factoextra`), and running regression models (`lme4`).
+This following post utilized data from a private precision teaching clinic in the United States. Each student in this data has a score for accuracy and fluency of math pinpoints at intake and then their score for those skills on a CBM after 40 hours of instruction.
+
+This report includes: **Sample visualizations** to understand participant distribution. **Data reshaping** to convert the dataset into a tidy format. **Analysis for three research questions** using clustering, regression, and t-tests.
+
+**###Research Questions and Methods:###**
+
+1.  **What math skills, when grouped, predict other skills?**
+
+    -   **Hierarchical clustering** is used to group skills that show similar learning patterns, helping identify which skills are related to others.
+
+2.  **What math skills predict outcomes on the CBM after 40 hours of instruction?**
+
+    -   **A regression model** is used to determine which skills contribute most to performance on the CBM test after 40 hours of instruction.
+
+3.  **How do targeted versus untargeted math skills relate to CBM outcomes?**
+
+    -   **A t-test is used** to compare performance between targeted and untargeted skills and assess their impact on CBM test results.
+
+Before reading in the data, I cleaned it in a different script so that I could remove the names and replace with unique id numbers (to protect student privacy).
+
+In this project, the first step I took was to load all required R packages. For data manipulation (`tidyverse`), visualizations (`ggplot2`), XXXXXXX, and running regression models (`lme4`).
 
 ```{r}
 library(tidyverse)
-library(readxl)
-library(janitor)
-library(factoextra)  
+library(ggplot2)
+library(cluster)
+library(broom)
 library(lme4)
 ```
 
-Next I read in the data from my local, I used code to import the dataset from the "Data Reorganization" sheet of my Excel file, and skip the first row, which contains column headers.
+Next I read in the data from my local and then used (`glimpse`) to see an overview of the data.
 
 ```{r}
-math_data <- read_excel("/Users/saratessapalos/Desktop/FIT learning/fitdata/data/Math Pinpoint Correlation Analysis.xlsx", sheet = "Data Reorganization", skip = 1)
+file_path <- "/Users/saratessapalos/Desktop/FIT learning/fitdata/data/Cleaned_Data.csv"
+df <- read_csv(file_path)
 
+glimpse(df)
 ```
 
-Next, I cleaned the column names and remove duplicate columns. I used clean_names to standardize the column names, select(-contains("empty")) to remove empty columns, and select(-which(duplicated(names(math_data)))) to remove duplicate columns.
+Next, I visualized the sample participants.
+
+### Explanation:
+
+-   These visualizations help us **understand the sample** by showing:
+    -   How many students have a **diagnosis**.
+    -   The **grade distribution**.
+    -   The **types of diagnoses** in the dataset.
 
 ```{r}
-clean_math_data <- math_data %>%
-  clean_names() %>%  
-  select(-contains("empty")) %>%  
-  select(-which(duplicated(names(math_data)))) 
+### Students With vs. Without Diagnosis
+df %>% 
+  mutate(Has_Diagnosis = ifelse(Diagnosis == "None" | is.na(Diagnosis), "No Diagnosis", "Has Diagnosis")) %>%
+  count(Has_Diagnosis) %>%
+  ggplot(aes(x = Has_Diagnosis, y = n, fill = Has_Diagnosis)) +
+  geom_bar(stat = "identity", color = "black") +
+  labs(title = "Students With vs. Without Diagnosis",
+       x = "Diagnosis Status",
+       y = "Count") +
+  scale_fill_manual(values = c("salmon", "skyblue"))
+
+### Grade Level Distribution
+df %>%
+  filter(!is.na(`Grade Level`)) %>%
+  count(`Grade Level`) %>%
+  ggplot(aes(x = reorder(`Grade Level`, n), y = n)) +
+  geom_bar(stat = "identity", fill = "steelblue", color = "black") +
+  labs(title = "Grade Level Distribution",
+       x = "Grade Level",
+       y = "Count") +
+  coord_flip()
+
+### Diagnosis Type Count
+df %>%
+  mutate(Diagnosis_Category = case_when(
+    Diagnosis == "Mood Disorder - Anxiety (e.g. selective mutism, anxiety, GAD)" ~ "Mood Disorder - Anxiety",
+    Diagnosis == "Learning Disability - Speech and language - Speech delay" ~ "Learning Disability - Speech Delay",
+    Diagnosis == "None" | is.na(Diagnosis) ~ "None"
+  )) %>%
+  count(Diagnosis_Category) %>%
+  ggplot(aes(x = Diagnosis_Category, y = n, fill = Diagnosis_Category)) +
+  geom_col(color = "black") +
+  labs(title = "Diagnosis Type Count",
+       x = "Diagnosis Type",
+       y = "Count") +
+  scale_fill_manual(values = c("lightcoral", "steelblue", "gray"))
 ```
 
-Next I used code to identify the skill-related and targeted columns for further analysis. I then created a mapping of skills to their respective target colum and used (\`filter) to ensure that only valid columns are included in the skills_targeted_map (preventing NA values from causing errors).
+## Reshape Data to Tidy Format
+
+I reshaped the dataset to a "tidy" format, where each row represents: Participant_ID, Grade Level, Diagnosis, Skill, Measure\` (Intake Accuracy, Post Fluency, etc.), Score. I converted categorical variables to factors to avoid regression errors. And I removed levels with only one category to prevent contrast errors in regression.
 
 ```{r}
-skill_columns <- names(clean_math_data)[grepl("intake|x40_hour", names(clean_math_data)) & !grepl("targeted", names(clean_math_data))]
-
-targeted_columns <- names(clean_math_data)[grepl("targeted", names(clean_math_data))]
-
-skill_targeted_map <- tibble(
-  skill = gsub("_targeted.*", "", targeted_columns),
-  targeted_col = targeted_columns
-) %>%
-  filter(targeted_col %in% names(clean_math_data))  
-```
-
-I then checked the column names to check if the structure was correct.
-
-```{r}
-print("Detected Skill Columns:")
-print(skill_columns)
-print("Detected Targeted Columns:")
-print(targeted_columns)
-```
-
-```{r}
-print(skill_columns)
-print("Targeted Column Found:", "x40_hour_targeted" %in% names(clean_math_data))
-```
-
-Next I reshape the dataset into a long format where each row represents a skill score. I also assign targeted status based on whether the skill was explicitly targeted during instruction.
-
-```{r}
-math_data_tidy <- clean_math_data %>%
+# Convert dataset to long format
+tidy_df <- df %>% 
   pivot_longer(
-    cols = all_of(skill_columns),
-    names_to = "skill",
-    values_to = "score"
-  ) %>%
-  left_join(skill_targeted_map, by = "skill") %>%
-  rowwise() %>%
-  mutate(
-    targeted = if (!is.na(targeted_col) & targeted_col %in% names(cur_data())) {
-      cur_data()[[targeted_col]]
-    } else {
-      0
-    },
-    targeted = factor(targeted, levels = c(0,1), labels = c("Untargeted", "Targeted"))
-  ) %>%
-  ungroup() %>%
-  select(-targeted_col) 
+    cols = -c(Participant_ID, `Grade Level`, Diagnosis),
+    names_to = c("Skill", "Measure"),
+    names_sep = " ",
+    values_to = "Score"
+  )
+
+# Convert categorical variables to factors
+tidy_df <- tidy_df %>% 
+  mutate(`Grade Level` = as.factor(`Grade Level`),
+         Diagnosis = as.factor(Diagnosis),
+         Skill = as.factor(Skill))
+
+# Remove any levels with a single category to avoid regression errors
+tidy_df <- tidy_df %>%
+  filter(n_distinct(Diagnosis) > 1, n_distinct(`Grade Level`) > 1, n_distinct(Skill) > 1)
+
+# View reshaped data
+glimpse(tidy_df)
 ```
+
+## 4. Answer Research Questions
+
+### **Q1: What math skills, when grouped, predict other skills?**
+
+to address this I XXXXX
+
+```{r}
+distance_matrix <- dist(df_wide, method = "euclidean")
+clustering <- hclust(distance_matrix, method = "ward.D2")
+plot(clustering, main = "Hierarchical Clustering of Skills")
+```
+
+The error message says there is not enough data points to perform clustering. So, I will need to figure out if there is a better way to investigate this research question.
+
+### **Q2: What math skills predict CBM outcomes after 40 hours?**
+
+I forst converted `Diagnosis`, `Grade Level`, and `Skill` to factors to avoid contrast errors.
+
+I then used **regression analysis** to find which skills predict post-test CBM outcomes.
+
+The skills with **significant coefficients** contribute most to CBM performance.
+
+```{r}
+regression_model <- lm(Score ~ Skill + `Grade Level` + Diagnosis, 
+                       data = tidy_df %>% filter(Measure == "Post Accuracy"))
+summary(regression_model)
+```
+
+okay?
+
+### **Q3: How do targeted versus untargeted math skills relate to CBM outcomes?**
+
+```{r}
+t_test_result <- t.test(Score ~ Measure, data = tidy_df %>% filter(Measure %in% c("Targeted", "Post Accuracy")))
+t_test_result
+```
+
+ok??
+
+note:
+
+**Hierarchical clustering** to group related math skills. **Regression analysis** to identify predictors of CBM outcomes.
+
+**T-tests** to compare targeted vs. untargeted skill improvements.
