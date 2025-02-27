@@ -3,14 +3,14 @@ project:
   output-dir: docs
 
 website:
-  title: "Saratessa Palos MA BCBA LBA"
+  title: "Saratessa Palos MA BCBA LBA"  
   navbar:
-    left:
+    left: []  
+    right:
       - text: "About"
         href: about.qmd
       - text: "CV"
         href: CV_PalosS.pdf  
-    right:
       - href: "https://bsky.app/profile/saratessa.bsky.social"
         text: "Bluesky"
       - icon: github

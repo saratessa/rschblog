@@ -1,11 +1,3 @@
-/* Make profile picture square */
-#quarto-content img[src*="profile.jpg"] {
-    border-radius: 0 !important; /* Removes circular effect */
-    width: 150px; /* Adjust as needed */
-    height: 150px; /* Ensures a square shape */
-    object-fit: cover; /* Prevents distortion */
-}
-
 /* Align text to the left */
 .quarto-about p, 
 .about p {
@@ -39,4 +31,33 @@ body {
 /* Add space between paragraphs in the About section */
 #quarto-content p {
     margin-bottom: 20px; /* Adjust as needed */
+}
+
+/* Change navbar background color to pink */
+.navbar, .quarto-title-banner {
+    background-color: #ff69b4 !important; /* Change this to any shade of pink */
+}
+
+/* Change text color in navbar if needed */
+.navbar a, .navbar .navbar-brand, .quarto-title-banner h1 {
+    color: white !important; /* Ensures contrast for readability */
+}
+
+/* Ensure dropdown menus match */
+.navbar .dropdown-menu {
+    background-color: #ff69b4 !important;
+}
+
+/* Change hover effects to match */
+.navbar a:hover {
+    color: #ffe4e1 !important; /* Lighter pink on hover */
+}
+/* Make the profile picture bigger and taller */
+.about img, 
+#quarto-content img[src*="profile.jpg"], 
+#quarto-content .about img {
+    width: 350px !important;  /* Adjust as needed */
+    height: 400px !important; /* Adjust to make it taller */
+    object-fit: cover !important; /* Ensures proportions remain correct */
+    border-radius: 0 !important; /* Ensures it's square */
 }
