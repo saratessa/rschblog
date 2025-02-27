@@ -1,0 +1,42 @@
+/* Make profile picture square */
+#quarto-content img[src*="profile.jpg"] {
+    border-radius: 0 !important; /* Removes circular effect */
+    width: 150px; /* Adjust as needed */
+    height: 150px; /* Ensures a square shape */
+    object-fit: cover; /* Prevents distortion */
+}
+
+/* Align text to the left */
+.quarto-about p, 
+.about p {
+    text-align: left !important;
+    max-width: 700px; /* Optional: keeps text readable */
+    margin: 0 auto;
+}
+/* Force all text in the About section to be left-aligned */
+#quarto-content .about p, 
+#quarto-content p {
+    text-align: left !important;
+    max-width: 700px; /* Optional: keeps text readable */
+    margin: 0 auto;
+}
+
+/* Ensure headings and other elements are also aligned left */
+#quarto-content h1, 
+#quarto-content h2, 
+#quarto-content h3, 
+#quarto-content h4, 
+#quarto-content h5, 
+#quarto-content h6 {
+    text-align: left !important;
+}
+
+/* Override global alignment if necessary */
+body {
+    text-align: left !important;
+}
+
+/* Add space between paragraphs in the About section */
+#quarto-content p {
+    margin-bottom: 20px; /* Adjust as needed */
+}

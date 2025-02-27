@@ -17,13 +17,12 @@ website:
         href: "https://github.com/saratessa"
   page-footer:
     center: "© 2025 Saratessa Palos | Powered by Quarto"
-    
+
 format:
   html:
-    theme: cosmo
-    css: styles.css
+    theme: jolla
+    css: custom.css
     includes:
-    in-header: _navbar.html
+      in-header: _navbar.html
 
 editor: visual
-

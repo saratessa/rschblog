@@ -4,12 +4,12 @@ image: profile.jpg
 about:
   template: jolla
   links:
-    - icon: Bluesky
+    - icon: bluesky
       text: Bluesky
-      href: https://bsky.app/profile/saratessa.bsky.social
+      href: "https://bsky.app/profile/saratessa.bsky.social"
     - icon: github
       text: Github
-      href: https://github.com/saratessa
+      href: "https://github.com/saratessa"
 ---
 
 I am a PhD student in Special Education and Clinical Science at the University of Oregon, specializing in Educational Data Science. My research focuses on improving outcomes for students with disabilities, particularly through early intervention and autism research. I study how evidence-based interventions can support the development of learning-related social skills in young children, ensuring they have a strong foundation for future success.
