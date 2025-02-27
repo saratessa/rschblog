@@ -1,0 +1,9 @@
+---
+title: "Post With Code"
+author: "Saratessa Palos"
+date: "2025-02-26"
+categories: [news, code, analysis]
+image: "image.jpg"
+---
+
+test
