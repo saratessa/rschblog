@@ -38,7 +38,7 @@ library(lme4)
 Next I read in the data from my local and then used (`glimpse`) to see an overview of the data.
 
 ```{r}
-file_path <- "/Users/saratessapalos/Desktop/FIT learning/fitdata/data/Cleaned_Data.csv"
+file_path <- "/Users/saratessapalos/Desktop/FIT learning/fitdata/data/Cleaned_Data1.csv"
 df <- read_csv(file_path)
 
 glimpse(df)
@@ -94,34 +94,94 @@ df %>%
 
 ## Reshape Data to Tidy Format
 
-I reshaped the dataset to a "tidy" format, where each row represents: Participant_ID, Grade Level, Diagnosis, Skill, Measure\` (Intake Accuracy, Post Fluency, etc.), Score. I converted categorical variables to factors to avoid regression errors. And I removed levels with only one category to prevent contrast errors in regression.
+[edit this now that changes were made]I reshaped the dataset to a "tidy" format, where each row represents: Participant_ID, Grade Level, Diagnosis, Skill, Measure\` (Intake Accuracy, Post Fluency, etc.), Score. I converted categorical variables to factors to avoid regression errors. And I removed levels with only one category to prevent contrast errors in regression.
 
 ```{r}
-# Convert dataset to long format
-tidy_df <- df %>% 
+# Start with clean data (row 4 onwards)
+clean_df <- df[4:nrow(df), ]
+
+# Step 2: Create proper column names by combining rows 1 and 2
+col_names_skill <- as.character(unlist(df[1, ]))
+col_names_assessment <- as.character(unlist(df[2, ]))
+
+# Fix any NA or empty values in column names
+col_names_skill <- ifelse(is.na(col_names_skill) | col_names_skill == "", paste0("Column_", 1:length(col_names_skill)), col_names_skill)
+col_names_assessment <- ifelse(is.na(col_names_assessment) | col_names_assessment == "", "Unknown", col_names_assessment)
+
+# Create combined names for all columns
+full_col_names <- vector("character", length(col_names_skill))
+for(i in 1:length(col_names_skill)) {
+  if(i <= 3) {
+    # Keep the original names for the first three columns
+    full_col_names[i] <- col_names_skill[i]
+  } else {
+    # Combine skill and assessment type for data columns
+    full_col_names[i] <- paste(col_names_skill[i], col_names_assessment[i], sep = "_")
+  }
+}
+
+# Make sure all column names are unique
+if(any(duplicated(full_col_names))) {
+  # Add a suffix to duplicated names
+  dups <- which(duplicated(full_col_names))
+  for(i in dups) {
+    full_col_names[i] <- paste0(full_col_names[i], "_", i)
+  }
+}
+
+# Assign the new column names
+colnames(clean_df) <- full_col_names
+
+# Step 3: Convert to tidy format
+tidy_df <- clean_df %>%
+  # Convert character columns to numeric (except first 3 columns)
+  mutate(across(4:ncol(.), ~as.numeric(as.character(.)))) %>%
+  # Convert to long format
   pivot_longer(
-    cols = -c(Participant_ID, `Grade Level`, Diagnosis),
-    names_to = c("Skill", "Measure"),
-    names_sep = " ",
+    cols = 4:ncol(.),
+    names_to = "Skill_Measure",
     values_to = "Score"
+  ) %>%
+  # Split Skill_Measure into Skill and Measure
+  # Use a more flexible pattern to handle different formats
+  separate(Skill_Measure, 
+           into = c("Skill", "Measure"),
+           sep = "_(?=(Intake|Post|Targeted)($|_))",  # Split before Intake, Post, or Targeted
+           fill = "right") %>%  # Handle any missing values
+  # Remove any trailing/leading whitespace
+  mutate(
+    Skill = trimws(Skill),
+    Measure = trimws(Measure)
   )
+```
+```{r}
+# Check the number of NAs in the Score column
+na_count <- sum(is.na(tidy_df$Score))
+total_count <- nrow(tidy_df)
+na_percentage <- (na_count / total_count) * 100
 
-# Convert categorical variables to factors
-tidy_df <- tidy_df %>% 
-  mutate(`Grade Level` = as.factor(`Grade Level`),
-         Diagnosis = as.factor(Diagnosis),
-         Skill = as.factor(Skill))
+# Print summary
+cat("Total rows:", total_count, "\n")
+cat("NA values in Score:", na_count, "\n")
+cat("Percentage NA:", na_percentage, "%\n")
 
-# Remove any levels with a single category to avoid regression errors
-tidy_df <- tidy_df %>%
-  filter(n_distinct(Diagnosis) > 1, n_distinct(`Grade Level`) > 1, n_distinct(Skill) > 1)
-
-# View reshaped data
-glimpse(tidy_df)
+# See what the tidy data looks like
+head(tidy_df)
 ```
 
-## 4. Answer Research Questions
+//////
+## Answer Research Questions
 
 ### **Q1: What math skills, when grouped, predict other skills?**
 
-to address this I XXXXX
+to address this I used a **Correlation analysis** to identify skills that **improve together**.
+Then I did **Association rule mining** to find patterns where mastering one skill predicts mastery of another.
+I then created the following visualizations: a **correlation heatmap** and **association rule graph**.
+```{r}
+# Create a correlation matrix for skill scores
+
+
+# Visualize correlation matrix
+
+```
+
