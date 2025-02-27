@@ -1,12 +1,83 @@
 ---
-title: "Welcome To My Blog"
-author: "Tristan O'Malley"
-date: "2025-02-23"
-categories: [news]
+title: "Math Pinpoint Correlation Analysis"
+author: "Saratessa"
+date: "2025-02-27"
+categories: [Precision Teaching, Math Instruction, Clustering & PCA]
 ---
 
-This is the first post in a Quarto blog. Welcome!
+The first step I took was to load all required R packages. For data manipulation (`tidyverse`), reading Excel files (`readxl`), cleaning column names (`janitor`), performing Principal Component Analysis (`factoextra`), and running regression models (`lme4`).
 
-![](thumbnail.jpg)
+```{r}
+library(tidyverse)
+library(readxl)
+library(janitor)
+library(factoextra)  
+library(lme4)
+```
 
-Since this post doesn't specify an explicit `image`, the first image in the post will be used in the listing page of posts.
+Next I read in the data from my local, I used code to import the dataset from the "Data Reorganization" sheet of my Excel file, and skip the first row, which contains column headers.
+
+```{r}
+math_data <- read_excel("/Users/saratessapalos/Desktop/FIT learning/fitdata/data/Math Pinpoint Correlation Analysis.xlsx", sheet = "Data Reorganization", skip = 1)
+
+```
+
+Next, I cleaned the column names and remove duplicate columns. I used clean_names to standardize the column names, select(-contains("empty")) to remove empty columns, and select(-which(duplicated(names(math_data)))) to remove duplicate columns.
+
+```{r}
+clean_math_data <- math_data %>%
+  clean_names() %>%  
+  select(-contains("empty")) %>%  
+  select(-which(duplicated(names(math_data)))) 
+```
+
+Next I used code to identify the skill-related and targeted columns for further analysis. I then created a mapping of skills to their respective target colum and used (\`filter) to ensure that only valid columns are included in the skills_targeted_map (preventing NA values from causing errors).
+
+```{r}
+skill_columns <- names(clean_math_data)[grepl("intake|x40_hour", names(clean_math_data)) & !grepl("targeted", names(clean_math_data))]
+
+targeted_columns <- names(clean_math_data)[grepl("targeted", names(clean_math_data))]
+
+skill_targeted_map <- tibble(
+  skill = gsub("_targeted.*", "", targeted_columns),
+  targeted_col = targeted_columns
+) %>%
+  filter(targeted_col %in% names(clean_math_data))  
+```
+
+I then checked the column names to check if the structure was correct.
+
+```{r}
+print("Detected Skill Columns:")
+print(skill_columns)
+print("Detected Targeted Columns:")
+print(targeted_columns)
+```
+
+```{r}
+print(skill_columns)
+print("Targeted Column Found:", "x40_hour_targeted" %in% names(clean_math_data))
+```
+
+Next I reshape the dataset into a long format where each row represents a skill score. I also assign targeted status based on whether the skill was explicitly targeted during instruction.
+
+```{r}
+math_data_tidy <- clean_math_data %>%
+  pivot_longer(
+    cols = all_of(skill_columns),
+    names_to = "skill",
+    values_to = "score"
+  ) %>%
+  left_join(skill_targeted_map, by = "skill") %>%
+  rowwise() %>%
+  mutate(
+    targeted = if (!is.na(targeted_col) & targeted_col %in% names(cur_data())) {
+      cur_data()[[targeted_col]]
+    } else {
+      0
+    },
+    targeted = factor(targeted, levels = c(0,1), labels = c("Untargeted", "Targeted"))
+  ) %>%
+  ungroup() %>%
+  select(-targeted_col) 
+```
