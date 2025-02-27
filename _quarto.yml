@@ -11,8 +11,9 @@ website:
       - text: "CV"
         href: CV_PalosS.pdf  
     right:
-      - icon: Blue Sky
-        href: "https://bsky.app/profile/saratessa.bsky.social"
+      - href: "https://bsky.app/profile/saratessa.bsky.social"
+        image: "images/bluesky.png"  
+        alt: "Bluesky"
       - icon: github
         href: "https://github.com/saratessa"
   page-footer:
@@ -22,6 +23,8 @@ format:
   html:
     theme: cosmo
     css: styles.css
+    includes:
+    in-header: _navbar.html
 
 editor: visual
 
