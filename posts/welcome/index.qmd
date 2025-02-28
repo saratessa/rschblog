@@ -14,14 +14,15 @@ This report includes: **Sample visualizations** to understand participant distri
 1.  **What math skills, when grouped, predict other skills?**
 
     -   **Hierarchical clustering** is used to group skills that show similar learning patterns, helping identify which skills are related to others.
+    
 
 2.  **What math skills predict outcomes on the CBM after 40 hours of instruction?**
 
-    -   **A regression model** is used to determine which skills contribute most to performance on the CBM test after 40 hours of instruction.
+    -   **A multiple regression model** is used.
 
 3.  **How do targeted versus untargeted math skills relate to CBM outcomes?**
 
-    -   **A t-test is used** to compare performance between targeted and untargeted skills and assess their impact on CBM test results.
+    -   **ANCOVA** is used.
 
 Before reading in the data, I cleaned it in a different script so that I could remove the names and replace with unique id numbers (to protect student privacy).
 
@@ -41,7 +42,6 @@ Next I read in the data from my local and then used (`glimpse`) to see an overvi
 file_path <- "/Users/saratessapalos/Desktop/FIT learning/fitdata/data/Cleaned_Data1.csv"
 df <- read_csv(file_path)
 
-glimpse(df)
 ```
 
 Next, I visualized the sample participants.
@@ -79,8 +79,8 @@ df %>%
 ### Diagnosis Type Count
 df %>%
   mutate(Diagnosis_Category = case_when(
-    Diagnosis == "Mood Disorder - Anxiety (e.g. selective mutism, anxiety, GAD)" ~ "Mood Disorder - Anxiety",
-    Diagnosis == "Learning Disability - Speech and language - Speech delay" ~ "Learning Disability - Speech Delay",
+    Diagnosis == "Mood Disorder - Anxiety (e.g. selective mutism, anxiety, GAD)" ~ "Mood Disorder",
+    Diagnosis == "Learning Disability - Speech and language - Speech delay" ~ "Learning Disability",
     Diagnosis == "None" | is.na(Diagnosis) ~ "None"
   )) %>%
   count(Diagnosis_Category) %>%
