@@ -1,8 +1,8 @@
 ---
-title: "Post With Code"
+title: "Examining the Role of Mathematical Language in Preschoolers’ Social and Behavioral Outcomes: A Hierarchical Linear Modeling Approach"
 author: "Saratessa Palos"
 date: "2025-02-26"
-categories: [news, code, analysis]
+categories: [hlm, code, analysis]
 image: "image.jpg"
 ---
 

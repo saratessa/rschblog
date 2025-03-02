@@ -1,13 +1,9 @@
 ---
-title: "Post With Code"
+title: "Homogeneous Achievement Grouping as a Pathway to Meaningful Inclusion: An Integrative Review and an Analysis of public school data in the Pacific Northwest"
 author: "Saratessa Palos"
 date: "2025-02-26"
 categories: [news, code, analysis]
 image: "image.jpg"
 ---
 
-This is a post with executable code.
-
-```{r}
-1 + 1
-```
+XXXX
