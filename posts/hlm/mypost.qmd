@@ -3,7 +3,6 @@ title: "Examining the Role of Mathematical Language in Preschoolers’ Social an
 author: "Saratessa Palos"
 date: "2025-02-26"
 categories: [hlm, code, analysis]
-image: "image.jpg"
 ---
 
 test
