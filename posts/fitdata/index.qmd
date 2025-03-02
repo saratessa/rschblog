@@ -1,5 +1,5 @@
 ---
-title: "Exploring PT Math pinpoints"
+title: "Exploring Precision Teaching (PT) Math pinpoints"
 author: "Saratessa"
 date: "2025-02-27"
 categories: [Precision Teaching, Math Instruction, Clustering]
