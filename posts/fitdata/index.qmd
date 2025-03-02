@@ -14,7 +14,6 @@ This report includes: **Sample visualizations** to understand participant distri
 1.  **What math skills, when grouped, predict other skills?**
 
     -   **Hierarchical clustering** is used to group skills that show similar learning patterns, helping identify which skills are related to others.
-    
 
 2.  **What math skills predict outcomes on the CBM after 40 hours of instruction?**
 
@@ -39,19 +38,10 @@ library(lme4)
 Next I read in the data from my local and then used (`glimpse`) to see an overview of the data.
 
 ```{r}
-file_path <- "/Users/saratessapalos/Desktop/FIT learning/fitdata/data/Cleaned_Data1.csv"
+file_path <- "/Users/saratessapalos/Desktop/Research/FIT learning/fitdata/data/Cleaned_Data1.csv"
 df <- read_csv(file_path)
-
 ```
 
-Next, I visualized the sample participants.
-
-### Explanation:
-
--   These visualizations help us **understand the sample** by showing:
-    -   How many students have a **diagnosis**.
-    -   The **grade distribution**.
-    -   The **types of diagnoses** in the dataset.
 
 ```{r}
 ### Students With vs. Without Diagnosis
@@ -94,7 +84,7 @@ df %>%
 
 ## Reshape Data to Tidy Format
 
-[edit this now that changes were made]I reshaped the dataset to a "tidy" format, where each row represents: Participant_ID, Grade Level, Diagnosis, Skill, Measure\` (Intake Accuracy, Post Fluency, etc.), Score. I converted categorical variables to factors to avoid regression errors. And I removed levels with only one category to prevent contrast errors in regression.
+[edit this now that changes were made\]I reshaped the dataset to a "tidy" format, where each row represents: Participant_ID, Grade Level, Diagnosis, Skill, Measure\` (Intake Accuracy, Post Fluency, etc.), Score. I converted categorical variables to factors to avoid regression errors. And I removed levels with only one category to prevent contrast errors in regression.
 
 ```{r}
 # Start with clean data (row 4 onwards)
@@ -154,6 +144,7 @@ tidy_df <- clean_df %>%
     Measure = trimws(Measure)
   )
 ```
+
 ```{r}
 # Check the number of NAs in the Score column
 na_count <- sum(is.na(tidy_df$Score))
@@ -169,14 +160,12 @@ cat("Percentage NA:", na_percentage, "%\n")
 head(tidy_df)
 ```
 
-//////
-## Answer Research Questions
+////// \## Answer Research Questions
 
 ### **Q1: What math skills, when grouped, predict other skills?**
 
-to address this I used a **Correlation analysis** to identify skills that **improve together**.
-Then I did **Association rule mining** to find patterns where mastering one skill predicts mastery of another.
-I then created the following visualizations: a **correlation heatmap** and **association rule graph**.
+to address this I used a **Correlation analysis** to identify skills that **improve together**. Then I did **Association rule mining** to find patterns where mastering one skill predicts mastery of another. I then created the following visualizations: a **correlation heatmap** and **association rule graph**.
+
 ```{r}
 # Create a correlation matrix for skill scores
 
@@ -184,4 +173,3 @@ I then created the following visualizations: a **correlation heatmap** and **ass
 # Visualize correlation matrix
 
 ```
-

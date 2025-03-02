@@ -244,7 +244,7 @@ The following objects are masked from 'package:tidyr':
 </div>
 <p>Next I read in the data from my local and then used (<code>glimpse</code>) to see an overview of the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>file_path <span class="ot">&lt;-</span> <span class="st">"/Users/saratessapalos/Desktop/FIT learning/fitdata/data/Cleaned_Data1.csv"</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>file_path <span class="ot">&lt;-</span> <span class="st">"/Users/saratessapalos/Desktop/Research/FIT learning/fitdata/data/Cleaned_Data1.csv"</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(file_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>New names:
@@ -642,17 +642,6 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 • `` -&gt; `...453`</code></pre>
 </div>
 </div>
-<p>Next, I visualized the sample participants.</p>
-<section id="explanation" class="level3">
-<h3 class="anchored" data-anchor-id="explanation">Explanation:</h3>
-<ul>
-<li>These visualizations help us <strong>understand the sample</strong> by showing:
-<ul>
-<li>How many students have a <strong>diagnosis</strong>.</li>
-<li>The <strong>grade distribution</strong>.</li>
-<li>The <strong>types of diagnoses</strong> in the dataset.</li>
-</ul></li>
-</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Students With vs. Without Diagnosis</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
@@ -710,7 +699,6 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 </div>
 </div>
 </div>
-</section>
 <section id="reshape-data-to-tidy-format" class="level2">
 <h2 class="anchored" data-anchor-id="reshape-data-to-tidy-format">Reshape Data to Tidy Format</h2>
 <p>[edit this now that changes were made]I reshaped the dataset to a “tidy” format, where each row represents: Participant_ID, Grade Level, Diagnosis, Skill, Measure` (Intake Accuracy, Post Fluency, etc.), Score. I converted categorical variables to factors to avoid regression errors. And I removed levels with only one category to prevent contrast errors in regression.</p>
