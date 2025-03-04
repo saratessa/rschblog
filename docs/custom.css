@@ -50,7 +50,7 @@ body {
 
 /* Change hover effects to match */
 .navbar a:hover {
-    color: #ffe4e1 !important; /* Lighter pink on hover */
+    color: #673147 !important; /* Lighter pink on hover */
 }
 /* Make the profile picture bigger and taller */
 .about img, 
