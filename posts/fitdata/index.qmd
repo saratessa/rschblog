@@ -53,14 +53,14 @@ df %>%
   labs(title = "Students With vs. Without Diagnosis",
        x = "Diagnosis Status",
        y = "Count") +
-  scale_fill_manual(values = c("salmon", "skyblue"))
+  scale_fill_manual(values = c("#FFC0CB", "#800080"))
 
 ### Grade Level Distribution
 df %>%
   filter(!is.na(`Grade Level`)) %>%
   count(`Grade Level`) %>%
   ggplot(aes(x = reorder(`Grade Level`, n), y = n)) +
-  geom_bar(stat = "identity", fill = "steelblue", color = "black") +
+  geom_bar(stat = "identity", fill = "#800080", color = "black") +
   labs(title = "Grade Level Distribution",
        x = "Grade Level",
        y = "Count") +
@@ -79,7 +79,7 @@ df %>%
   labs(title = "Diagnosis Type Count",
        x = "Diagnosis Type",
        y = "Count") +
-  scale_fill_manual(values = c("lightcoral", "steelblue", "gray"))
+  scale_fill_manual(values = c("#FFC0CB", "#800080", "gray"))
 ```
 
 ## Reshape Data to Tidy Format
