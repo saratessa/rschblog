@@ -33,9 +33,9 @@ body {
     margin-bottom: 20px; /* Adjust as needed */
 }
 
-/* Change navbar background color to pink */
+/* Change navbar background color to */
 .navbar, .quarto-title-banner {
-    background-color: #FFC0CB !important; /* Change this to any shade of pink */
+    background-color: #CC5500 !important; /* Change this to any shade of pink */
 }
 
 /* Change text color in navbar if needed */
