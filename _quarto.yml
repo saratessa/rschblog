@@ -16,7 +16,7 @@ website:
       - icon: github
         href: "https://github.com/saratessa"
   page-footer:
-    center: "© 2025 Saratessa Palos | Powered by Quarto"
+    center: "© 2025 Saratessa Palos | Santino Consulting"
 
 format:
   html:
