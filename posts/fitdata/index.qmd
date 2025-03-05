@@ -41,9 +41,10 @@ Next I read in the data from my local and then used (`glimpse`) to see an overvi
 file_path <- "/Users/saratessapalos/Desktop/Research/FIT learning/fitdata/data/Cleaned_Data1.csv"
 df <- read_csv(file_path)
 ```
-
+create visualizations of the sample
 
 ```{r}
+
 ### Students With vs. Without Diagnosis
 df %>% 
   mutate(Has_Diagnosis = ifelse(Diagnosis == "None" | is.na(Diagnosis), "No Diagnosis", "Has Diagnosis")) %>%
