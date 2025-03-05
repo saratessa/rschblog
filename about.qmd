@@ -14,7 +14,9 @@ about:
 
 I am a PhD student in Special Education and Clinical Science at the University of Oregon, specializing in Educational Data Science. My research focuses on improving outcomes for students with disabilities, particularly through early intervention and autism research. I study how evidence-based interventions can support the development of learning-related social skills in young children, ensuring they have a strong foundation for future success.
 
-My work as a Precision Teacher and Behavior Analyst informs my research in the use of precise behavioral measurement and educational data science to refine interventions and assess their broader impact. One of my primary research methodologies is evidence synthesis through systematic literature reviews and meta-analyses, I evaluate the effectiveness of interventions and translate findings into meaningful practice and policy recommendations. My work is grounded in the belief that data-driven decision-making can enhance teaching practices and lead to meaningful improvements in student outcomes.
+My work as a Precision Teacher and Behavior Analyst informs my research in the use of precise behavioral measurement and educational data science to refine interventions and assess their broader impact.
+
+One of my primary research methodologies is evidence synthesis through systematic literature reviews and meta-analyses, I evaluate the effectiveness of interventions and translate findings into meaningful practice and policy recommendations. My work is grounded in the belief that data-driven decision-making can enhance teaching practices and lead to meaningful improvements in student outcomes.
 
 Before pursuing my PhD, I worked as a special education teacher, where I gained firsthand experience in developing individualized instruction for students with diverse learning needs. That experience continues to shape my research and reinforces my dedication to bridging the gap between research and practice. Through my work, I aim to contribute to a more equitable education system where all students receive the support they need to thrive.
 
