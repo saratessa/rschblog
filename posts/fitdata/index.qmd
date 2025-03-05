@@ -37,7 +37,7 @@ library(lme4)
 
 Next I read in the data from my local and then used (`glimpse`) to see an overview of the data.
 
-```{r}
+```{r include=FALSE}
 file_path <- "/Users/saratessapalos/Desktop/Research/FIT learning/fitdata/data/Cleaned_Data1.csv"
 df <- read_csv(file_path)
 ```
