@@ -35,7 +35,7 @@ body {
 
 /* Change navbar background color to */
 .navbar, .quarto-title-banner {
-    background-color: #DDDACA !important; /* Change this to any shade of pink */
+    background-color: #4A4A31 !important; /* Change this to any shade of pink */
 }
 
 /* Change text color in navbar if needed */
@@ -45,7 +45,7 @@ body {
 
 /* Ensure dropdown menus match */
 .navbar .dropdown-menu {
-    background-color: #DDDACA !important;
+    background-color: #4A4A31 !important;
 }
 
 /* Change hover effects to match */
