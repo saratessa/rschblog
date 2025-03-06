@@ -33,6 +33,8 @@ library(ggplot2)
 library(cluster)
 library(broom)
 library(lme4)
+library(dplyr)
+library(viridis)
 ```
 
 ```{r include=FALSE}
@@ -46,37 +48,60 @@ df %>%
   mutate(Has_Diagnosis = ifelse(Diagnosis == "None" | is.na(Diagnosis), "No Diagnosis", "Has Diagnosis")) %>%
   count(Has_Diagnosis) %>%
   ggplot(aes(x = Has_Diagnosis, y = n, fill = Has_Diagnosis)) +
-  geom_bar(stat = "identity", color = "black") +
+  geom_bar(stat = "identity", color = "black", width = 0.6) +
+  scale_fill_manual(values = c("#5DADE2", "#34495E")) +  # Soft blue & gray for contrast
   labs(title = "Students With vs. Without Diagnosis",
        x = "Diagnosis Status",
        y = "Count") +
-  scale_fill_manual(values = c("#FFC0CB", "#800080"))
+  theme_minimal(base_size = 16) +  
+  theme(legend.position = "none", 
+        plot.title = element_text(size = 18, face = "bold", family = "serif", hjust = 0.5), 
+        axis.title = element_text(face = "bold", family = "serif"),
+        axis.text = element_text(family = "serif"),
+        panel.grid.major.y = element_line(color = "gray80"))  
+
 
 ### Grade Level Distribution
 df %>%
   filter(!is.na(`Grade Level`)) %>%
   count(`Grade Level`) %>%
-  ggplot(aes(x = reorder(`Grade Level`, n), y = n)) +
-  geom_bar(stat = "identity", fill = "#800080", color = "black") +
+  ggplot(aes(x = reorder(`Grade Level`, n), y = n, fill = n)) +
+  geom_bar(stat = "identity", color = "black", width = 0.6) +
+  scale_fill_gradient(low = "#85C1E9", high = "#1F618D") +  # Soft-to-dark blue gradient
   labs(title = "Grade Level Distribution",
        x = "Grade Level",
        y = "Count") +
-  coord_flip()
+  coord_flip() +  
+  theme_minimal(base_size = 16) +  
+  theme(plot.title = element_text(size = 18, face = "bold", family = "serif", hjust = 0.5),
+        axis.title = element_text(face = "bold", family = "serif"),
+        axis.text = element_text(family = "serif"),
+        legend.position = "none",
+        panel.grid.major.x = element_line(color = "gray80")) 
+
 
 ### Diagnosis Type Count
 df %>%
   mutate(Diagnosis_Category = case_when(
     Diagnosis == "Mood Disorder - Anxiety (e.g. selective mutism, anxiety, GAD)" ~ "Mood Disorder",
     Diagnosis == "Learning Disability - Speech and language - Speech delay" ~ "Learning Disability",
-    Diagnosis == "None" | is.na(Diagnosis) ~ "None"
+    Diagnosis == "None" | is.na(Diagnosis) ~ "None",
+    TRUE ~ "Other"
   )) %>%
   count(Diagnosis_Category) %>%
-  ggplot(aes(x = Diagnosis_Category, y = n, fill = Diagnosis_Category)) +
-  geom_col(color = "black") +
+  ggplot(aes(x = reorder(Diagnosis_Category, n), y = n, fill = Diagnosis_Category)) +
+  geom_col(color = "black", width = 0.6) +
+  scale_fill_manual(values = c("#AED6F1", "#3498DB", "#2C3E50", "#85929E")) +  # Softer blues & gray
   labs(title = "Diagnosis Type Count",
        x = "Diagnosis Type",
        y = "Count") +
-  scale_fill_manual(values = c("#FFC0CB", "#800080", "gray"))
+  coord_flip() +
+  theme_minimal(base_size = 16) +  
+  theme(legend.position = "none",
+        plot.title = element_text(size = 18, face = "bold", family = "serif", hjust = 0.5),
+        axis.title = element_text(face = "bold", family = "serif"),
+        axis.text = element_text(family = "serif"),
+        panel.grid.major.x = element_line(color = "gray80"))
 ```
 
 ## Reshape Data to Tidy Format
