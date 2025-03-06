@@ -196,24 +196,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>This following post utilized data from a private precision teaching clinic in the United States. Each student in this data has a score for accuracy and fluency of math pinpoints at intake and then their score for those skills on a CBM after 40 hours of instruction.</p>
-<p>This report includes: <strong>Sample visualizations</strong> to understand participant distribution. <strong>Data reshaping</strong> to convert the dataset into a tidy format. <strong>Analysis for three research questions</strong> using clustering, regression, and t-tests.</p>
+<p>This report includes: <strong>Sample visualizations</strong> to understand the sample of participants. <strong>Data reshaping</strong> to convert the dataset into a tidy format. <strong>Analysis for three research questions</strong> using clustering, regression, and ANCOVA.</p>
 <p><strong>###Research Questions and Methods:###</strong></p>
 <ol type="1">
 <li><p><strong>What math skills, when grouped, predict other skills?</strong></p>
 <ul>
-<li><strong>Hierarchical clustering</strong> is used to group skills that show similar learning patterns, helping identify which skills are related to others.</li>
+<li>First <strong>Hierarchical clustering</strong> is used to identify skill groupings based on similar learning patterns.</li>
 </ul></li>
 <li><p><strong>What math skills predict outcomes on the CBM after 40 hours of instruction?</strong></p>
 <ul>
-<li><strong>A multiple regression model</strong> is used.</li>
+<li>Next <strong>multiple regression modeling</strong> is applied to determine predictive relationships.</li>
 </ul></li>
 <li><p><strong>How do targeted versus untargeted math skills relate to CBM outcomes?</strong></p>
 <ul>
-<li><strong>ANCOVA</strong> is used.</li>
+<li><strong>ANCOVA (Analysis of Covariance)</strong> is used to examine differences between these skill types.</li>
 </ul></li>
 </ol>
-<p>Before reading in the data, I cleaned it in a different script so that I could remove the names and replace with unique id numbers (to protect student privacy).</p>
-<p>In this project, the first step I took was to load all required R packages. For data manipulation (<code>tidyverse</code>), visualizations (<code>ggplot2</code>), XXXXXXX, and running regression models (<code>lme4</code>).</p>
+<p>Before loading the dataset, I cleaned it in a separate script to remove names and replace them with unique ID numbers for student privacy.</p>
+<p>In this project, the first step I took was to load all required R packages. For data manipulation (<code>tidyverse</code>), visualizations (<code>ggplot2</code>), clustering analysis (<code>cluster</code>), tidying model outputs (<code>broom</code>), and running regression models (<code>lme4</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -242,8 +242,7 @@ The following objects are masked from 'package:tidyr':
     expand, pack, unpack</code></pre>
 </div>
 </div>
-<p>Next I read in the data from my local and then used (<code>glimpse</code>) to see an overview of the data.</p>
-<p>create visualizations of the sample</p>
+<p>Here are the visualizations of the sample participants.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Students With vs. Without Diagnosis</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>

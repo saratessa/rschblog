@@ -7,25 +7,25 @@ categories: [Precision Teaching, Math Instruction, Clustering]
 
 This following post utilized data from a private precision teaching clinic in the United States. Each student in this data has a score for accuracy and fluency of math pinpoints at intake and then their score for those skills on a CBM after 40 hours of instruction.
 
-This report includes: **Sample visualizations** to understand participant distribution. **Data reshaping** to convert the dataset into a tidy format. **Analysis for three research questions** using clustering, regression, and t-tests.
+This report includes: **Sample visualizations** to understand the sample of participants. **Data reshaping** to convert the dataset into a tidy format. **Analysis for three research questions** using clustering, regression, and ANCOVA.
 
 **###Research Questions and Methods:###**
 
 1.  **What math skills, when grouped, predict other skills?**
 
-    -   **Hierarchical clustering** is used to group skills that show similar learning patterns, helping identify which skills are related to others.
+    -   First **Hierarchical clustering** is used to identify skill groupings based on similar learning patterns.
 
 2.  **What math skills predict outcomes on the CBM after 40 hours of instruction?**
 
-    -   **A multiple regression model** is used.
+    -   Next **multiple regression modeling** is applied to determine predictive relationships.
 
 3.  **How do targeted versus untargeted math skills relate to CBM outcomes?**
 
-    -   **ANCOVA** is used.
+    -   **ANCOVA (Analysis of Covariance)** is used to examine differences between these skill types.
 
-Before reading in the data, I cleaned it in a different script so that I could remove the names and replace with unique id numbers (to protect student privacy).
+Before loading the dataset, I cleaned it in a separate script to remove names and replace them with unique ID numbers for student privacy.
 
-In this project, the first step I took was to load all required R packages. For data manipulation (`tidyverse`), visualizations (`ggplot2`), XXXXXXX, and running regression models (`lme4`).
+In this project, the first step I took was to load all required R packages. For data manipulation (`tidyverse`), visualizations (`ggplot2`), clustering analysis (`cluster`), tidying model outputs (`broom`), and running regression models (`lme4`).
 
 ```{r}
 library(tidyverse)
@@ -35,14 +35,11 @@ library(broom)
 library(lme4)
 ```
 
-Next I read in the data from my local and then used (`glimpse`) to see an overview of the data.
-
 ```{r include=FALSE}
 file_path <- "/Users/saratessapalos/Desktop/Research/FIT learning/fitdata/data/Cleaned_Data1.csv"
 df <- read_csv(file_path)
 ```
-create visualizations of the sample
-
+Here are the visualizations of the sample participants. 
 ```{r}
 ### Students With vs. Without Diagnosis
 df %>% 
