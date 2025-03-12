@@ -30,6 +30,9 @@ library(mice)
 library(sjPlot)
 library(MuMIn) 
 library(DiagrammeR)
+library(summarytools)
+library(psych)
+library(knitr)
 ```
 
 ```{r}
