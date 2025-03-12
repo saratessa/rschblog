@@ -66,13 +66,7 @@ data_long$timepoint <- as.numeric(data_long$timepoint)
 ```{r}
 # Perform multiple imputation
 imputed_data <- mice(data_long, m = 5, method = "pmm", seed = 123)
-```
-
-```{r}
-# Replace missing values with imputed data
 data_long <- complete(imputed_data, 1)
-
-colSums(is.na(data_long))
 ```
 
 ### **Centering Variables for Analysis**
@@ -87,20 +81,11 @@ data_long <- data_long %>%
   )
 ```
 
-### **Building the Null Model for Social Skills**
+### **Building the Null Models**
 
 ```{r}
-# Null model for Social Skills
 null_model_social <- lmer(ssisss_c ~ (1 | pkschlid), data = data_long)
-summary(null_model_social)
-```
-
-### **Building the Null Model for Problem Behavior**
-
-```{r}
-# Null model for Problem Behavior
 null_model_behavior <- lmer(ssispb_c ~ (1 | pkschlid), data = data_long)
-summary(null_model_behavior)
 ```
 
 ### **Computing the Intraclass Correlation Coefficient (ICC)**
@@ -111,46 +96,64 @@ icc(null_model_social)
 icc(null_model_behavior)
 ```
 
-### **Building the Full Model for Social Skills**
+### Stepwise Model Building
 
 ```{r}
-# Full Model for Social Skills
-model_social <- lmer(ssisss_c ~ ppvtst_c + mlasm_c + (1 | pkschlid), 
-                     data = data_long)
-summary(model_social)
+# First, test vocabulary alone
+model_social_voc <- lmer(ssisss_c ~ ppvtst_c + (1 | pkschlid), data = data_long)
+model_behavior_voc <- lmer(ssispb_c ~ ppvtst_c + (1 | pkschlid), data = data_long)
+
+# Add math language
+model_social_full <- lmer(ssisss_c ~ ppvtst_c + mlasm_c + (1 | pkschlid), data = data_long)
+model_behavior_full <- lmer(ssispb_c ~ ppvtst_c + mlasm_c + (1 | pkschlid), data = data_long)
+
+# Model comparison
+anova(model_social_voc, model_social_full)
+anova(model_behavior_voc, model_behavior_full)
 ```
 
-### **Building the Full Model for Problem Behavior**
+### Check residual normality
 
 ```{r}
-# Full Model for Problem Behavior
-model_behavior <- lmer(ssispb_c ~ ppvtst_c + mlasm_c + (1 | pkschlid), 
-                       data = data_long)
-summary(model_behavior)
+qqnorm(resid(model_social_full))
+qqline(resid(model_social_full))
+qqnorm(resid(model_behavior_full))
+qqline(resid(model_behavior_full))
 ```
 
-### **Comparing Models Using ANOVA**
+### Check homoscedasticity
 
 ```{r}
-anova(null_model_social, model_social)  
-anova(null_model_behavior, model_behavior)
+plot(fitted(model_social_full), resid(model_social_full))
+plot(fitted(model_behavior_full), resid(model_behavior_full))
 ```
 
-### **Checking Residual Normality (Assumption Check)**
+### Extract fixed and random effects
 
 ```{r}
-# Check Residual Normality
-qqnorm(resid(model_social))
-qqline(resid(model_social))
-
-qqnorm(resid(model_behavior))
-qqline(resid(model_behavior))
+fixef(model_social_full)
+fixef(model_behavior_full)
+ranef(model_social_full)
+ranef(model_behavior_full)
 ```
 
-### **Checking Homoscedasticity (Variance Consistency)**
+### Compute final ICC
 
 ```{r}
-# Check Homoscedasticity
-plot(fitted(model_social), resid(model_social))
-plot(fitted(model_behavior), resid(model_behavior))
+icc(model_social_full)
+icc(model_behavior_full)
+```
+
+### Compute effect size
+
+```{r}
+r.squaredGLMM(model_social_full)
+r.squaredGLMM(model_behavior_full)
+```
+
+### Tables
+
+```{r}
+sjPlot::tab_model(model_social_full, model_behavior_full, show.std = TRUE, show.ci = TRUE, show.p = TRUE, file = "HLM_Results.doc")
+cat("![](HLM_Results.html)")
 ```
