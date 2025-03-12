@@ -27,6 +27,8 @@ library(ggplot2)
 library(dplyr)    
 library(tidyr)    
 library(mice)
+library(sjPlot)
+library(MuMIn) 
 ```
 
 ```{r}
@@ -34,20 +36,11 @@ data <- read_dta("/Users/saratessapalos/Desktop/Research/HLM Paper/project/socia
 ```
 
 ```{r}
-head(data)
-```
-
-```{r}
-# Select relevant variables (ONLY vocabulary, math language, social skills, and problem behavior)
+# Select relevant variables 
 data_subset <- data %>%
   select(
-    id,               
-    pkschlid, ppvtst_1, ppvtst_2,   
-    mlasm_1, mlasm_2,     
-    ssisss_1, ssisss_2,   
-    ssispb_1, ssispb_2    
-  )        
-
+    id, pkschlid, ppvtst_1, ppvtst_2,   
+    mlasm_1, mlasm_2, ssisss_1, ssisss_2, ssispb_1, ssispb_2)       
 ```
 
 ### **Reshaping the Data: Wide to Long Format**
@@ -59,16 +52,13 @@ data_long <- data_subset %>%
     names_to = c(".value", "timepoint"),
     names_sep = "_"
   )
-```
 
-```{r}
 data_long$timepoint <- as.numeric(data_long$timepoint)
 ```
 
 ### **Checking for Missing Values**
 
-```{r}
-colSums(is.na(data_long))
+```{colSums(is.na(data_long))}
 ```
 
 ### **Handling Missing Data Using Multiple Imputation**
