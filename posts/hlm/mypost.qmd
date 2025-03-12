@@ -92,8 +92,23 @@ null_model_behavior <- lmer(ssispb_c ~ (1 | pkschlid), data = data_long)
 
 ```{r}
 # ICC
-icc(null_model_social)
-icc(null_model_behavior)
+icc_social <- icc(null_model_social)
+icc_behavior <- icc(null_model_behavior)
+```
+
+```{r}
+#ICC Bar Chart
+icc_values <- data.frame(
+  Model = c("Social Skills", "Problem Behavior"),
+  ICC = c(icc_social, icc_behavior)
+)
+
+ggplot(icc_values, aes(x = Model, y = ICC, fill = Model)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Intraclass Correlation Coefficient (ICC)",
+       y = "Proportion of Variance Explained by Schools",
+       x = "Outcome Variable") +
+  theme_minimal()
 ```
 
 ### Stepwise Model Building
@@ -147,13 +162,32 @@ icc(model_behavior_full)
 ### Compute effect size
 
 ```{r}
-r.squaredGLMM(model_social_full)
-r.squaredGLMM(model_behavior_full)
+r2_social <- r.squaredGLMM(model_social_full)
+r2_behavior <- r.squaredGLMM(model_behavior_full)
+```
+
+```{r}
+#Scatterplot of Vocabulary vs. Social Skills
+ggplot(data_long, aes(x = ppvtst_c, y = ssisss_c)) +
+  geom_point(alpha = 0.5, color = "blue") +
+  geom_smooth(method = "lm", color = "red", se = FALSE) +
+  labs(title = "Relationship Between Vocabulary and Social Skills",
+       x = "Centered Vocabulary Score",
+       y = "Centered Social Skills Score") +
+  theme_minimal()
+```
+
+```{r}
+# Q-Q Plot for Residuals
+qqnorm(resid(model_social_full))
+qqline(resid(model_social_full))
+qqnorm(resid(model_behavior_full))
+qqline(resid(model_behavior_full))
 ```
 
 ### Tables
 
 ```{r}
-sjPlot::tab_model(model_social_full, model_behavior_full, show.std = TRUE, show.ci = TRUE, show.p = TRUE, file = "HLM_Results.doc")
-cat("![](HLM_Results.html)")
+sjPlot::tab_model(model_social_full, model_behavior_full, show.std = TRUE, show.ci = TRUE, show.p = TRUE, file = "HLM_Results.html")
+knitr::include_url("HLM_Results.html")
 ```
