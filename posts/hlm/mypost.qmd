@@ -30,9 +30,10 @@ library(mice)
 library(sjPlot)
 library(MuMIn) 
 library(DiagrammeR)
-library(summarytools)
+library(viridis)
+library(hrbrthemes)
 library(psych)
-library(knitr)
+library(reshape2)
 ```
 
 ```{r}
@@ -73,6 +74,33 @@ Before analysis, I handle missing values using multiple imputation to prevent bi
 # Perform multiple imputation
 imputed_data <- mice(data_long, m = 5, method = "pmm", seed = 123)
 data_long <- complete(imputed_data, 1)
+```
+
+## **Descriptive statistics**
+
+```{r}
+# Descriptive Statistics
+descr_stats <- descr(data_long, stats = c("mean", "sd", "min", "med", "max"))
+print(descr_stats)
+
+# Correlation Table
+cor_matrix <- corr.test(data_long)
+cor_table <- cor_matrix$r
+p_values <- cor_matrix$p
+
+# Display correlation table
+kable(cor_table, digits = 2, caption = "Correlation Matrix")
+```
+
+```{r}
+# Ensure factor conversion for plotting
+
+
+# Demographic Statistics Bar Chart
+
+
+# Correlation Heatmap
+
 ```
 
 ## **Centering Predictors**
@@ -150,22 +178,28 @@ print(r2_behavior)
 ```
 
 ```{r}
-ggplot(data_long, aes(x = ppvtst_c, y = ssisss_c)) +
-  geom_point(alpha = 0.7, color = "black") +
-  geom_smooth(method = "lm", color = "blue", se = FALSE) +
-  theme_minimal()
-
 DiagrammeR::grViz(
   "digraph G {
-    VocabularyFall -> VocabularySpring;
-    MathLanguageFall -> MathLanguageSpring;
-    EF_Fall -> EF_Spring;
-    VocabularyFall -> EF_Spring;
-    MathLanguageFall -> EF_Spring;
-    EF_Fall -> VocabularySpring;
-    EF_Fall -> MathLanguageSpring;
+    rankdir=LR;
+    node [shape = rectangle, style = filled, color = lightblue];
+
+    Vocabulary [label = 'Vocabulary'];
+    MathLanguage [label = 'Mathematical Language'];
+    SocialSkills [label = 'Social Skills'];
+    ProblemBehavior [label = 'Problem Behavior'];
+
+    Vocabulary -> SocialSkills [label = 'β = 0.45'];
+    Vocabulary -> ProblemBehavior [label = 'β = -0.30'];
+    SocialSkills -> Vocabulary [label = 'β = 0.25'];
+    SocialSkills -> MathLanguage [label = 'β = 0.20'];
+    ProblemBehavior -> Vocabulary [label = 'β = -0.15'];
+    ProblemBehavior -> MathLanguage [label = 'β = -0.10'];
+    MathLanguage -> SocialSkills [label = 'β = 0.35'];
+    MathLanguage -> ProblemBehavior [label = 'β = -0.25'];
   }"
 )
+
+
 ```
 
 ## **Final Model Summary and APA Tables**
