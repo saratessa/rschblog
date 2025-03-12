@@ -45,6 +45,8 @@ data_subset <- data %>%
 
 ### **Reshaping the Data: Wide to Long Format**
 
+Since the data contains multiple time points, I reshaped it into long format to prepare for modeling.
+
 ```{r}
 data_long <- data_subset %>%
   pivot_longer(
@@ -56,12 +58,12 @@ data_long <- data_subset %>%
 data_long$timepoint <- as.numeric(data_long$timepoint)
 ```
 
-### **Checking for Missing Values**
+### **Handling Missing Data Using Multiple Imputation**
+
+Before analysis, I handle missing values using multiple imputation to prevent biased estimates.
 
 ```{colSums(is.na(data_long))}
 ```
-
-### **Handling Missing Data Using Multiple Imputation**
 
 ```{r}
 # Perform multiple imputation
@@ -69,7 +71,9 @@ imputed_data <- mice(data_long, m = 5, method = "pmm", seed = 123)
 data_long <- complete(imputed_data, 1)
 ```
 
-### **Centering Variables for Analysis**
+## **Centering Predictors**
+
+To improve interpretability and avoid multicollinearity, all predictor variables are centered around their mean.
 
 ```{r}
 data_long <- data_long %>%
@@ -83,6 +87,8 @@ data_long <- data_long %>%
 
 ### **Building the Null Models**
 
+First I estimated an empty model with only a random intercept for `pkschlid` to examine the proportion of variance explained at the school level.
+
 ```{r}
 null_model_social <- lmer(ssisss_c ~ (1 | pkschlid), data = data_long)
 null_model_behavior <- lmer(ssispb_c ~ (1 | pkschlid), data = data_long)
@@ -90,10 +96,13 @@ null_model_behavior <- lmer(ssispb_c ~ (1 | pkschlid), data = data_long)
 
 ### **Computing the Intraclass Correlation Coefficient (ICC)**
 
+The ICC measures how much variance in social skills and problem behavior is due to differences between schools.
+
 ```{r}
-# ICC
 icc_social <- icc(null_model_social)
 icc_behavior <- icc(null_model_behavior)
+print(icc_social)
+print(icc_behavior)
 ```
 
 ```{r}
@@ -127,13 +136,13 @@ anova(model_social_voc, model_social_full)
 anova(model_behavior_voc, model_behavior_full)
 ```
 
-### Check residual normality
+### **Extracting and Interpreting Results**
 
 ```{r}
-qqnorm(resid(model_social_full))
-qqline(resid(model_social_full))
-qqnorm(resid(model_behavior_full))
-qqline(resid(model_behavior_full))
+fixef_social <- fixef(model_social_full)
+fixef_behavior <- fixef(model_behavior_full)
+print(fixef_social)
+print(fixef_behavior)
 ```
 
 ### Check homoscedasticity
