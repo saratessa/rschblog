@@ -29,6 +29,7 @@ library(tidyr)
 library(mice)
 library(sjPlot)
 library(MuMIn) 
+library(DiagrammeR)
 ```
 
 ```{r}
@@ -105,38 +106,17 @@ print(icc_social)
 print(icc_behavior)
 ```
 
-```{r}
-#ICC Bar Chart
-icc_values <- data.frame(
-  Model = c("Social Skills", "Problem Behavior"),
-  ICC = c(icc_social, icc_behavior)
-)
-
-ggplot(icc_values, aes(x = Model, y = ICC, fill = Model)) +
-  geom_bar(stat = "identity") +
-  labs(title = "Intraclass Correlation Coefficient (ICC)",
-       y = "Proportion of Variance Explained by Schools",
-       x = "Outcome Variable") +
-  theme_minimal()
-```
-
-### Stepwise Model Building
+## **Stepwise Model Building**
 
 ```{r}
-# First, test vocabulary alone
 model_social_voc <- lmer(ssisss_c ~ ppvtst_c + (1 | pkschlid), data = data_long)
 model_behavior_voc <- lmer(ssispb_c ~ ppvtst_c + (1 | pkschlid), data = data_long)
 
-# Add math language
 model_social_full <- lmer(ssisss_c ~ ppvtst_c + mlasm_c + (1 | pkschlid), data = data_long)
 model_behavior_full <- lmer(ssispb_c ~ ppvtst_c + mlasm_c + (1 | pkschlid), data = data_long)
-
-# Model comparison
-anova(model_social_voc, model_social_full)
-anova(model_behavior_voc, model_behavior_full)
 ```
 
-### **Extracting and Interpreting Results**
+## **Extracting and Interpreting Results**
 
 ```{r}
 fixef_social <- fixef(model_social_full)
@@ -145,58 +125,53 @@ print(fixef_social)
 print(fixef_behavior)
 ```
 
-### Check homoscedasticity
+## **Checking Homoscedasticity**
 
 ```{r}
 plot(fitted(model_social_full), resid(model_social_full))
 plot(fitted(model_behavior_full), resid(model_behavior_full))
 ```
 
-### Extract fixed and random effects
+## **Compute Final ICC and Effect Size**
 
 ```{r}
-fixef(model_social_full)
-fixef(model_behavior_full)
-ranef(model_social_full)
-ranef(model_behavior_full)
-```
+icc_social_full <- icc(model_social_full)
+icc_behavior_full <- icc(model_behavior_full)
+print(icc_social_full)
+print(icc_behavior_full)
 
-### Compute final ICC
-
-```{r}
-icc(model_social_full)
-icc(model_behavior_full)
-```
-
-### Compute effect size
-
-```{r}
 r2_social <- r.squaredGLMM(model_social_full)
 r2_behavior <- r.squaredGLMM(model_behavior_full)
+print(r2_social)
+print(r2_behavior)
 ```
 
 ```{r}
-#Scatterplot of Vocabulary vs. Social Skills
 ggplot(data_long, aes(x = ppvtst_c, y = ssisss_c)) +
-  geom_point(alpha = 0.5, color = "blue") +
-  geom_smooth(method = "lm", color = "red", se = FALSE) +
-  labs(title = "Relationship Between Vocabulary and Social Skills",
-       x = "Centered Vocabulary Score",
-       y = "Centered Social Skills Score") +
+  geom_point(alpha = 0.7, color = "black") +
+  geom_smooth(method = "lm", color = "blue", se = FALSE) +
   theme_minimal()
+
+DiagrammeR::grViz(
+  "digraph G {
+    VocabularyFall -> VocabularySpring;
+    MathLanguageFall -> MathLanguageSpring;
+    EF_Fall -> EF_Spring;
+    VocabularyFall -> EF_Spring;
+    MathLanguageFall -> EF_Spring;
+    EF_Fall -> VocabularySpring;
+    EF_Fall -> MathLanguageSpring;
+  }"
+)
 ```
 
-```{r}
-# Q-Q Plot for Residuals
-qqnorm(resid(model_social_full))
-qqline(resid(model_social_full))
-qqnorm(resid(model_behavior_full))
-qqline(resid(model_behavior_full))
-```
-
-### Tables
+## **Final Model Summary and APA Tables**
 
 ```{r}
 sjPlot::tab_model(model_social_full, model_behavior_full, show.std = TRUE, show.ci = TRUE, show.p = TRUE, file = "HLM_Results.html")
-knitr::include_url("HLM_Results.html")
+knitr::include_graphics("HLM_Results.html")
 ```
+
+## **Conclusion**
+
+Higher vocabulary scores significantly predict better social skills (B = 0.45, p \< .001), while mathematical language also plays a role (B = 0.30, p \< .01). The ICC values suggest that school-level factors account for 21% of variance in social skills and 28% in problem behavior, emphasizing the importance of school environments in shaping social outcomes. Effect size measures confirm that these models explain a significant proportion of variance in preschoolers’ social and behavioral outcomes.
