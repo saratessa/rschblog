@@ -34,6 +34,8 @@ library(viridis)
 library(hrbrthemes)
 library(psych)
 library(reshape2)
+library(lmerTest)
+library(knitr)
 ```
 
 ```{r}
@@ -67,40 +69,12 @@ data_long$timepoint <- as.numeric(data_long$timepoint)
 
 Before analysis, I handle missing values using multiple imputation to prevent biased estimates.
 
-```{colSums(is.na(data_long))}
-```
+`{colSums(is.na(data_long))}`
 
 ```{r}
 # Perform multiple imputation
 imputed_data <- mice(data_long, m = 5, method = "pmm", seed = 123)
 data_long <- complete(imputed_data, 1)
-```
-
-## **Descriptive statistics**
-
-```{r}
-# Descriptive Statistics
-descr_stats <- descr(data_long, stats = c("mean", "sd", "min", "med", "max"))
-print(descr_stats)
-
-# Correlation Table
-cor_matrix <- corr.test(data_long)
-cor_table <- cor_matrix$r
-p_values <- cor_matrix$p
-
-# Display correlation table
-kable(cor_table, digits = 2, caption = "Correlation Matrix")
-```
-
-```{r}
-# Ensure factor conversion for plotting
-
-
-# Demographic Statistics Bar Chart
-
-
-# Correlation Heatmap
-
 ```
 
 ## **Centering Predictors**
@@ -145,6 +119,10 @@ model_behavior_voc <- lmer(ssispb_c ~ ppvtst_c + (1 | pkschlid), data = data_lon
 
 model_social_full <- lmer(ssisss_c ~ ppvtst_c + mlasm_c + (1 | pkschlid), data = data_long)
 model_behavior_full <- lmer(ssispb_c ~ ppvtst_c + mlasm_c + (1 | pkschlid), data = data_long)
+
+summary(model_social_voc)
+summary(model_behavior_voc)
+
 ```
 
 ## **Extracting and Interpreting Results**
