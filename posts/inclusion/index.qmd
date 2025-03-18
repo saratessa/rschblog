@@ -5,4 +5,4 @@ date: "2025-02-26"
 categories: [news, code, analysis]
 ---
 
-XXXX
+This is a new test
