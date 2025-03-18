@@ -27,7 +27,8 @@ Before loading the dataset, I cleaned it in a separate script to remove names an
 
 In this project, the first step I took was to load all required R packages. For data manipulation (`tidyverse`), visualizations (`ggplot2`), clustering analysis (`cluster`), tidying model outputs (`broom`), and running regression models (`lme4`).
 
-```{r}
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(ggplot2)
 library(cluster)
@@ -109,10 +110,6 @@ df %>%
         panel.grid.major.x = element_line(color = "gray80"))
 
 ```
-
-
-
-
 
 
 ```{r include=FALSE}
