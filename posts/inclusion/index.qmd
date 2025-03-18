@@ -1,8 +1,8 @@
 ---
 title: "Homogeneous Achievement Grouping as a Pathway to Meaningful Inclusion: An Integrative Review and an Analysis of public school data in the Pacific Northwest"
 author: "Saratessa Palos"
-date: "2025-02-26"
-categories: [news, code, analysis]
+date: "2025-03-18"
+categories: [Pacific Northwest(PNW), Literature Review, Inclusive Education, Homogeneous Achievement Grouping(HAG)]
 ---
 
 This is a new test

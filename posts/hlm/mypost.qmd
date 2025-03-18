@@ -1,8 +1,8 @@
 ---
 title: "Examining the Role of Mathematical Language in Preschoolers’ Social and Behavioral Outcomes: A Hierarchical Linear Modeling Approach"
 author: "Saratessa Palos"
-date: "2025-02-26"
-categories: [hlm, code, analysis]
+date: "2025-03-20"
+categories: [Cross-Lagged Pannel Model(CLPM), Hierarchical Linear Modeling(HLM), Early Childhood]
 ---
 
 ## Examining the Role of Mathematical Language in Preschoolers’ Social and Behavioral Outcomes: A Hierarchical Linear Modeling Approach

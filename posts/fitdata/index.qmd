@@ -1,8 +1,8 @@
 ---
 title: "Exploring Precision Teaching (PT) Math pinpoints"
 author: "Saratessa"
-date: "2025-02-27"
-categories: [Precision Teaching, Math Instruction, Clustering]
+date: "2025-03-19"
+categories: [Precision Teaching(PT), Math Instruction, Hierarchical Clustering, Multiple Regression]
 ---
 
 This following post utilized data from a private precision teaching clinic in the United States. Each student in this data has a score for accuracy and fluency of math pinpoints at intake and then their score for those skills on a CBM after 40 hours of instruction.

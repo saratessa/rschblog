@@ -2,8 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/fitdata/index.html",
       "/posts/hlm/mypost.html",
+      "/posts/fitdata/index.html",
       "/posts/inclusion/index.html"
     ]
   }
