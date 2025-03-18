@@ -27,8 +27,7 @@ Before loading the dataset, I cleaned it in a separate script to remove names an
 
 In this project, the first step I took was to load all required R packages. For data manipulation (`tidyverse`), visualizations (`ggplot2`), clustering analysis (`cluster`), tidying model outputs (`broom`), and running regression models (`lme4`).
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+```{r, setup, include=FALSE, echo=FALSE}
 library(tidyverse)
 library(ggplot2)
 library(cluster)
@@ -38,13 +37,13 @@ library(dplyr)
 library(viridis)
 ```
 
-```{r include=FALSE}
+```{r,include=FALSE, echo=FALSE}
 file_path <- "/Users/saratessapalos/Desktop/Research/FIT learning/fitdata/data/Cleaned_Data1.csv"
 df <- read_csv(file_path)
 ```
 
 Here are the visualizations of the sample participants. 
-```{r echo=FALSE}
+```{r, echo=FALSE}
 # Hide code output in the post
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -112,7 +111,7 @@ df %>%
 ```
 
 
-```{r include=FALSE}
+```{r, echo=FALSE}
 ###BEFORE PEER REVIEW
 ### Students With vs. Without Diagnosis
 df %>% 
@@ -179,7 +178,7 @@ df %>%
 
 [edit this now that changes were made\]I reshaped the dataset to a "tidy" format, where each row represents: Participant_ID, Grade Level, Diagnosis, Skill, Measure\` (Intake Accuracy, Post Fluency, etc.), Score. I converted categorical variables to factors to avoid regression errors. And I removed levels with only one category to prevent contrast errors in regression.
 
-```{r}
+```{r, include=FALSE, echo=FALSE, warning=FALSE}
 # Start with clean data (row 4 onwards)
 clean_df <- df[4:nrow(df), ]
 
@@ -238,7 +237,7 @@ tidy_df <- clean_df %>%
   )
 ```
 
-```{r}
+```{r, echo=FALSE}
 # Check the number of NAs in the Score column
 na_count <- sum(is.na(tidy_df$Score))
 total_count <- nrow(tidy_df)
@@ -259,7 +258,7 @@ head(tidy_df)
 
 to address this I used a **Correlation analysis** to identify skills that **improve together**. Then I did **Association rule mining** to find patterns where mastering one skill predicts mastery of another. I then created the following visualizations: a **correlation heatmap** and **association rule graph**.
 
-```{r}
+```{r, echo=FALSE}
 # Create a correlation matrix for skill scores
 
 
