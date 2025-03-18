@@ -43,7 +43,7 @@ df <- read_csv(file_path)
 ```
 
 Here are the visualizations of the sample participants. 
-```{r}
+```{r echo=FALSE}
 # Hide code output in the post
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -115,7 +115,7 @@ df %>%
 
 
 
-```{r}
+```{r include=FALSE}
 ###BEFORE PEER REVIEW
 ### Students With vs. Without Diagnosis
 df %>% 
