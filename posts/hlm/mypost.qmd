@@ -17,7 +17,7 @@ Hypothesis 1: Higher vocabulary and math language will be associated with better
 
 Hypothesis 2: Lower vocabulary and math language will be associated with higher problem behavior.
 
-```{r}
+```{r, include=FALSE, echo=FALSE}
 library(lme4)     
 library(haven)      
 library(tidyverse)  
@@ -38,11 +38,11 @@ library(lmerTest)
 library(knitr)
 ```
 
-```{r}
+```{r, include=FALSE, echo=FALSE}
 data <- read_dta("/Users/saratessapalos/Desktop/Research/HLM Paper/project/socialskills_problembx/data/data.dta")
 ```
 
-```{r}
+```{r, echo=FALSE}
 # Select relevant variables 
 data_subset <- data %>%
   select(
@@ -54,7 +54,7 @@ data_subset <- data %>%
 
 Since the data contains multiple time points, I reshaped it into long format to prepare for modeling.
 
-```{r}
+```{r, echo=FALSE}
 data_long <- data_subset %>%
   pivot_longer(
     cols = c(ppvtst_1, ppvtst_2, mlasm_1, mlasm_2, ssisss_1, ssisss_2, ssispb_1, ssispb_2),
@@ -71,7 +71,7 @@ Before analysis, I handle missing values using multiple imputation to prevent bi
 
 `{colSums(is.na(data_long))}`
 
-```{r}
+```{r, include=FALSE, echo=FALSE}
 # Perform multiple imputation
 imputed_data <- mice(data_long, m = 5, method = "pmm", seed = 123)
 data_long <- complete(imputed_data, 1)
@@ -81,7 +81,7 @@ data_long <- complete(imputed_data, 1)
 
 To improve interpretability and avoid multicollinearity, all predictor variables are centered around their mean.
 
-```{r}
+```{r, include=FALSE, echo=FALSE}
 data_long <- data_long %>%
   mutate(
     ppvtst_c = scale(ppvtst, center = TRUE, scale = FALSE), 
@@ -136,14 +136,14 @@ print(fixef_behavior)
 
 ## **Checking Homoscedasticity**
 
-```{r}
+```{r, echo=FALSE}
 plot(fitted(model_social_full), resid(model_social_full))
 plot(fitted(model_behavior_full), resid(model_behavior_full))
 ```
 
 ## **Compute Final ICC and Effect Size**
 
-```{r}
+```{r, echo=FALSE}
 icc_social_full <- icc(model_social_full)
 icc_behavior_full <- icc(model_behavior_full)
 print(icc_social_full)

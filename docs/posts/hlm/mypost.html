@@ -102,6 +102,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../../site_libs/viz-1.8.2/viz.js"></script>
+<link href="../../site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+<script src="../../site_libs/grViz-binding-1.0.11/grViz.js"></script>
 
 
 <link rel="stylesheet" href="../../custom.css">
@@ -206,239 +211,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>RQ2: Does vocabulary and mathematical language predict problem behavior in preschoolers?</li>
 </ul>
 <p>Hypothesis 2: Lower vocabulary and math language will be associated with higher problem behavior.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)     </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: Matrix</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)      </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.0.4     </code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ tidyr::expand() masks Matrix::expand()
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-✖ tidyr::pack()   masks Matrix::pack()
-✖ tidyr::unpack() masks Matrix::unpack()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>here() starts at /Users/saratessapalos/Desktop/Research/Research Blog/rschblog</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)    </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)    </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mice)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'mice'
-
-The following object is masked from 'package:stats':
-
-    filter
-
-The following objects are masked from 'package:base':
-
-    cbind, rbind</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"/Users/saratessapalos/Desktop/Research/HLM Paper/project/socialskills_problembx/data/data.dta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3,276
-     id lenaid pkschlid pkclasid gender     bday       cohort    group   county 
-  &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl+lbl&gt;  &lt;date&gt;     &lt;dbl+lbl&gt; &lt;dbl+l&gt; &lt;dbl+l&gt;
-1     1     NA       11        1 0 [male]   2011-03-03 1 [cohor… 1 [omw] 6 [all…
-2     2     NA       11        1 0 [male]   2011-01-06 1 [cohor… 1 [omw] 6 [all…
-3     3     NA       11        2 0 [male]   2010-10-05 1 [cohor… 1 [omw] 6 [all…
-4     4     NA       12        3 0 [male]   2011-03-15 1 [cohor… 1 [omw] 6 [all…
-5     5     NA       12        3 0 [male]   2011-04-15 1 [cohor… 1 [omw] 6 [all…
-6     6     NA       12        3 1 [female] 2011-07-25 1 [cohor… 1 [omw] 6 [all…
-# ℹ 3,267 more variables: racethn &lt;dbl+lbl&gt;, race &lt;dbl+lbl&gt;,
-#   hispanic &lt;dbl+lbl&gt;, income &lt;dbl&gt;, poverty &lt;dbl+lbl&gt;, pktype &lt;dbl+lbl&gt;,
-#   pkptq &lt;dbl&gt;, pkday &lt;dbl+lbl&gt;, pkclasdt &lt;date&gt;, pkclasex &lt;dbl&gt;,
-#   pkclases &lt;dbl&gt;, pkclasco &lt;dbl&gt;, pkclasis &lt;dbl&gt;, prek &lt;dbl+lbl&gt;,
-#   kclasid &lt;dbl&gt;, kschlid &lt;dbl&gt;, kclasdt &lt;date&gt;, kclasex &lt;dbl&gt;, kclases &lt;dbl&gt;,
-#   kclasco &lt;dbl&gt;, kclasis &lt;dbl&gt;, avdate_1 &lt;date&gt;, ageyrs_1 &lt;dbl&gt;,
-#   agemos_1 &lt;dbl&gt;, pdemex_1 &lt;dbl&gt;, pdemdt_1 &lt;date&gt;, pdem1_1 &lt;dbl+lbl&gt;, …</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select relevant variables (ONLY vocabulary, math language, social skills, and problem behavior)</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>data_subset <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    id,               </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    pkschlid, ppvtst_1, ppvtst_2,   </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    mlasm_1, mlasm_2,     </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    ssisss_1, ssisss_2,   </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    ssispb_1, ssispb_2    </span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  )        </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <section id="reshaping-the-data-wide-to-long-format" class="level3">
 <h3 class="anchored" data-anchor-id="reshaping-the-data-wide-to-long-format"><strong>Reshaping the Data: Wide to Long Format</strong></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data_subset <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(ppvtst_1, ppvtst_2, mlasm_1, mlasm_2, ssisss_1, ssisss_2, ssispb_1, ssispb_2),</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">".value"</span>, <span class="st">"timepoint"</span>),</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_sep =</span> <span class="st">"_"</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data_long<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(data_long<span class="sc">$</span>timepoint)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="checking-for-missing-values" class="level3">
-<h3 class="anchored" data-anchor-id="checking-for-missing-values"><strong>Checking for Missing Values</strong></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(data_long))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       id  pkschlid timepoint    ppvtst     mlasm    ssisss    ssispb 
-        0        20         0       145       106       185       185 </code></pre>
-</div>
-</div>
+<p>Since the data contains multiple time points, I reshaped it into long format to prepare for modeling.</p>
 </section>
 <section id="handling-missing-data-using-multiple-imputation" class="level3">
 <h3 class="anchored" data-anchor-id="handling-missing-data-using-multiple-imputation"><strong>Handling Missing Data Using Multiple Imputation</strong></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform multiple imputation</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>imputed_data <span class="ot">&lt;-</span> <span class="fu">mice</span>(data_long, <span class="at">m =</span> <span class="dv">5</span>, <span class="at">method =</span> <span class="st">"pmm"</span>, <span class="at">seed =</span> <span class="dv">123</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
- iter imp variable
-  1   1  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  1   2  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  1   3  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  1   4  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  1   5  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  2   1  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  2   2  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  2   3  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  2   4  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  2   5  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  3   1  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  3   2  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  3   3  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  3   4  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  3   5  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  4   1  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  4   2  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  4   3  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  4   4  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  4   5  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  5   1  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  5   2  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  5   3  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  5   4  pkschlid  ppvtst  mlasm  ssisss  ssispb
-  5   5  pkschlid  ppvtst  mlasm  ssisss  ssispb</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace missing values with imputed data</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> <span class="fu">complete</span>(imputed_data, <span class="dv">1</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(data_long))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       id  pkschlid timepoint    ppvtst     mlasm    ssisss    ssispb 
-        0         0         0         0         0         0         0 </code></pre>
-</div>
-</div>
+<p>Before analysis, I handle missing values using multiple imputation to prevent biased estimates.</p>
+<p><code>{colSums(is.na(data_long))}</code></p>
 </section>
-<section id="centering-variables-for-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="centering-variables-for-analysis"><strong>Centering Variables for Analysis</strong></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data_long <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">ppvtst_c =</span> <span class="fu">scale</span>(ppvtst, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>), </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mlasm_c =</span> <span class="fu">scale</span>(mlasm, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>),  </span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">ssisss_c =</span> <span class="fu">scale</span>(ssisss, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>),  </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">ssispb_c =</span> <span class="fu">scale</span>(ssispb, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>)  </span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
-<section id="building-the-null-model-for-social-skills" class="level3">
-<h3 class="anchored" data-anchor-id="building-the-null-model-for-social-skills"><strong>Building the Null Model for Social Skills</strong></h3>
+<section id="centering-predictors" class="level2">
+<h2 class="anchored" data-anchor-id="centering-predictors"><strong>Centering Predictors</strong></h2>
+<p>To improve interpretability and avoid multicollinearity, all predictor variables are centered around their mean.</p>
+<section id="building-the-null-models" class="level3">
+<h3 class="anchored" data-anchor-id="building-the-null-models"><strong>Building the Null Models</strong></h3>
+<p>First I estimated an empty model with only a random intercept for <code>pkschlid</code> to examine the proportion of variance explained at the school level.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Null model for Social Skills</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>null_model_social <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssisss_c <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null_model_social)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: ssisss_c ~ (1 | pkschlid)
-   Data: data_long
-
-REML criterion at convergence: 12542.4
-
-Scaled residuals: 
-     Min       1Q   Median       3Q      Max 
--3.00067 -0.64685  0.03271  0.69541  2.54400 
-
-Random effects:
- Groups   Name        Variance Std.Dev.
- pkschlid (Intercept) 115.9    10.76   
- Residual             440.4    20.99   
-Number of obs: 1388, groups:  pkschlid, 132
-
-Fixed effects:
-            Estimate Std. Error t value
-(Intercept)   -1.363      1.154  -1.181</code></pre>
-</div>
-</div>
-</section>
-<section id="building-the-null-model-for-problem-behavior" class="level3">
-<h3 class="anchored" data-anchor-id="building-the-null-model-for-problem-behavior"><strong>Building the Null Model for Problem Behavior</strong></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Null model for Problem Behavior</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>null_model_behavior <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssispb_c <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(null_model_behavior)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: ssispb_c ~ (1 | pkschlid)
-   Data: data_long
-
-REML criterion at convergence: 10920.5
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.0932 -0.7030 -0.1542  0.5849  3.9810 
-
-Random effects:
- Groups   Name        Variance Std.Dev.
- pkschlid (Intercept)  51.95    7.208  
- Residual             133.28   11.545  
-Number of obs: 1388, groups:  pkschlid, 132
-
-Fixed effects:
-            Estimate Std. Error t value
-(Intercept)   1.1657     0.7322   1.592</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>null_model_social <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssisss_c <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>null_model_behavior <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssispb_c <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="computing-the-intraclass-correlation-coefficient-icc" class="level3">
 <h3 class="anchored" data-anchor-id="computing-the-intraclass-correlation-coefficient-icc"><strong>Computing the Intraclass Correlation Coefficient (ICC)</strong></h3>
+<p>The ICC measures how much variance in social skills and problem behavior is due to differences between schools.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ICC</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">icc</span>(null_model_social)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>icc_social <span class="ot">&lt;-</span> <span class="fu">icc</span>(null_model_social)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>icc_behavior <span class="ot">&lt;-</span> <span class="fu">icc</span>(null_model_behavior)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(icc_social)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Intraclass Correlation Coefficient
 
     Adjusted ICC: 0.208
   Unadjusted ICC: 0.208</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">icc</span>(null_model_behavior)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(icc_behavior)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Intraclass Correlation Coefficient
 
@@ -447,163 +254,281 @@ Fixed effects:
 </div>
 </div>
 </section>
-<section id="building-the-full-model-for-social-skills" class="level3">
-<h3 class="anchored" data-anchor-id="building-the-full-model-for-social-skills"><strong>Building the Full Model for Social Skills</strong></h3>
+</section>
+<section id="stepwise-model-building" class="level2">
+<h2 class="anchored" data-anchor-id="stepwise-model-building"><strong>Stepwise Model Building</strong></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Full Model for Social Skills</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>model_social <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssisss_c <span class="sc">~</span> ppvtst_c <span class="sc">+</span> mlasm_c <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), </span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">data =</span> data_long)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_social)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>model_social_voc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssisss_c <span class="sc">~</span> ppvtst_c <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>model_behavior_voc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssispb_c <span class="sc">~</span> ppvtst_c <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>model_social_full <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssisss_c <span class="sc">~</span> ppvtst_c <span class="sc">+</span> mlasm_c <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>model_behavior_full <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssispb_c <span class="sc">~</span> ppvtst_c <span class="sc">+</span> mlasm_c <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_social_voc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: ssisss_c ~ ppvtst_c + mlasm_c + (1 | pkschlid)
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: ssisss_c ~ ppvtst_c + (1 | pkschlid)
    Data: data_long
 
-REML criterion at convergence: 12449.5
+REML criterion at convergence: 12493.2
 
 Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--2.9413 -0.6869  0.0235  0.6705  2.9161 
+     Min       1Q   Median       3Q      Max 
+-3.06122 -0.67381  0.02478  0.69968  2.69615 
 
 Random effects:
  Groups   Name        Variance Std.Dev.
- pkschlid (Intercept) 125.7    11.21   
- Residual             406.5    20.16   
+ pkschlid (Intercept) 120.1    10.96   
+ Residual             421.8    20.54   
 Number of obs: 1388, groups:  pkschlid, 132
 
 Fixed effects:
-            Estimate Std. Error t value
-(Intercept) -1.20898    1.17404  -1.030
-ppvtst_c     0.09676    0.04718   2.051
-mlasm_c      1.56388    0.23121   6.764
+              Estimate Std. Error         df t value Pr(&gt;|t|)    
+(Intercept)   -1.17200    1.16120  123.13247  -1.009    0.315    
+ppvtst_c       0.28603    0.03855 1372.09074   7.420 2.04e-13 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
-         (Intr) ppvts_
-ppvtst_c  0.021       
-mlasm_c  -0.005 -0.595</code></pre>
+         (Intr)
+ppvtst_c 0.023 </code></pre>
 </div>
-</div>
-</section>
-<section id="building-the-full-model-for-problem-behavior" class="level3">
-<h3 class="anchored" data-anchor-id="building-the-full-model-for-problem-behavior"><strong>Building the Full Model for Problem Behavior</strong></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Full Model for Problem Behavior</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>model_behavior <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssispb_c <span class="sc">~</span> ppvtst_c <span class="sc">+</span> mlasm_c <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), </span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">data =</span> data_long)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_behavior)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_behavior_voc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML ['lmerMod']
-Formula: ssispb_c ~ ppvtst_c + mlasm_c + (1 | pkschlid)
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
+lmerModLmerTest]
+Formula: ssispb_c ~ ppvtst_c + (1 | pkschlid)
    Data: data_long
 
-REML criterion at convergence: 10902
+REML criterion at convergence: 10909.6
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--3.2503 -0.6956 -0.1676  0.5742  4.1407 
+-3.1604 -0.7043 -0.1587  0.5776  4.1024 
 
 Random effects:
  Groups   Name        Variance Std.Dev.
- pkschlid (Intercept)  52.67    7.258  
- Residual             130.64   11.430  
+ pkschlid (Intercept)  51.93    7.206  
+ Residual             131.67   11.475  
 Number of obs: 1388, groups:  pkschlid, 132
 
 Fixed effects:
-            Estimate Std. Error t value
-(Intercept)  1.11285    0.73450   1.515
-ppvtst_c    -0.03893    0.02686  -1.450
-mlasm_c     -0.41231    0.13160  -3.133
+              Estimate Std. Error         df t value Pr(&gt;|t|)    
+(Intercept)    1.10107    0.73122  126.50617   1.506    0.135    
+ppvtst_c      -0.08889    0.02168 1358.14168  -4.100 4.37e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 Correlation of Fixed Effects:
-         (Intr) ppvts_
-ppvtst_c  0.020       
-mlasm_c  -0.004 -0.594</code></pre>
+         (Intr)
+ppvtst_c 0.022 </code></pre>
 </div>
 </div>
 </section>
-<section id="comparing-models-using-anova" class="level3">
-<h3 class="anchored" data-anchor-id="comparing-models-using-anova"><strong>Comparing Models Using ANOVA</strong></h3>
+<section id="extracting-and-interpreting-results" class="level2">
+<h2 class="anchored" data-anchor-id="extracting-and-interpreting-results"><strong>Extracting and Interpreting Results</strong></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(null_model_social, model_social)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>refitting model(s) with ML (instead of REML)</code></pre>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fixef_social <span class="ot">&lt;-</span> <span class="fu">fixef</span>(model_social_full)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fixef_behavior <span class="ot">&lt;-</span> <span class="fu">fixef</span>(model_behavior_full)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fixef_social)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)    ppvtst_c     mlasm_c 
+-1.20897692  0.09676041  1.56388028 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fixef_behavior)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)    ppvtst_c     mlasm_c 
+ 1.11284984 -0.03892677 -0.41230580 </code></pre>
+</div>
+</div>
+</section>
+<section id="checking-homoscedasticity" class="level2">
+<h2 class="anchored" data-anchor-id="checking-homoscedasticity"><strong>Checking Homoscedasticity</strong></h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="mypost_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="mypost_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="compute-final-icc-and-effect-size" class="level2">
+<h2 class="anchored" data-anchor-id="compute-final-icc-and-effect-size"><strong>Compute Final ICC and Effect Size</strong></h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># Intraclass Correlation Coefficient
+
+    Adjusted ICC: 0.236
+  Unadjusted ICC: 0.221</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Data: data_long
-Models:
-null_model_social: ssisss_c ~ (1 | pkschlid)
-model_social: ssisss_c ~ ppvtst_c + mlasm_c + (1 | pkschlid)
-                  npar   AIC   BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)    
-null_model_social    3 12551 12566 -6272.3    12545                         
-model_social         5 12456 12482 -6222.9    12446 98.717  2  &lt; 2.2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(null_model_behavior, model_behavior)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>refitting model(s) with ML (instead of REML)</code></pre>
+<pre><code># Intraclass Correlation Coefficient
+
+    Adjusted ICC: 0.287
+  Unadjusted ICC: 0.283</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Data: data_long
-Models:
-null_model_behavior: ssispb_c ~ (1 | pkschlid)
-model_behavior: ssispb_c ~ ppvtst_c + mlasm_c + (1 | pkschlid)
-                    npar   AIC   BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)    
-null_model_behavior    3 10928 10943 -5460.9    10922                         
-model_behavior         5 10905 10931 -5447.6    10895 26.492  2  1.767e-06 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<pre><code>            R2m       R2c
+[1,] 0.06329894 0.2845134</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            R2m       R2c
+[1,] 0.01633917 0.2989862</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>DiagrammeR<span class="sc">::</span><span class="fu">grViz</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"digraph G {</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="st">    rankdir=LR;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="st">    node [shape = rectangle, style = filled, color = lightblue];</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="st">    Vocabulary [label = 'Vocabulary'];</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="st">    MathLanguage [label = 'Mathematical Language'];</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="st">    SocialSkills [label = 'Social Skills'];</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="st">    ProblemBehavior [label = 'Problem Behavior'];</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="st">    Vocabulary -&gt; SocialSkills [label = 'β = 0.45'];</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="st">    Vocabulary -&gt; ProblemBehavior [label = 'β = -0.30'];</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="st">    SocialSkills -&gt; Vocabulary [label = 'β = 0.25'];</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="st">    SocialSkills -&gt; MathLanguage [label = 'β = 0.20'];</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="st">    ProblemBehavior -&gt; Vocabulary [label = 'β = -0.15'];</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="st">    ProblemBehavior -&gt; MathLanguage [label = 'β = -0.10'];</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="st">    MathLanguage -&gt; SocialSkills [label = 'β = 0.35'];</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="st">    MathLanguage -&gt; ProblemBehavior [label = 'β = -0.25'];</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="st">  }"</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="grViz html-widget html-fill-item" id="htmlwidget-133641a14480094a8a28" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-133641a14480094a8a28">{"x":{"diagram":"digraph G {\n    rankdir=LR;\n    node [shape = rectangle, style = filled, color = lightblue];\n\n    Vocabulary [label = \"Vocabulary\"];\n    MathLanguage [label = \"Mathematical Language\"];\n    SocialSkills [label = \"Social Skills\"];\n    ProblemBehavior [label = \"Problem Behavior\"];\n\n    Vocabulary -> SocialSkills [label = \"β = 0.45\"];\n    Vocabulary -> ProblemBehavior [label = \"β = -0.30\"];\n    SocialSkills -> Vocabulary [label = \"β = 0.25\"];\n    SocialSkills -> MathLanguage [label = \"β = 0.20\"];\n    ProblemBehavior -> Vocabulary [label = \"β = -0.15\"];\n    ProblemBehavior -> MathLanguage [label = \"β = -0.10\"];\n    MathLanguage -> SocialSkills [label = \"β = 0.35\"];\n    MathLanguage -> ProblemBehavior [label = \"β = -0.25\"];\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
-<section id="checking-residual-normality-assumption-check" class="level3">
-<h3 class="anchored" data-anchor-id="checking-residual-normality-assumption-check"><strong>Checking Residual Normality (Assumption Check)</strong></h3>
+<section id="final-model-summary-and-apa-tables" class="level2">
+<h2 class="anchored" data-anchor-id="final-model-summary-and-apa-tables"><strong>Final Model Summary and APA Tables</strong></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check Residual Normality</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(model_social))</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(model_social))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(model_social_full, model_behavior_full, <span class="at">show.std =</span> <span class="cn">TRUE</span>, <span class="at">show.ci =</span> <span class="cn">TRUE</span>, <span class="at">show.p =</span> <span class="cn">TRUE</span>, <span class="at">file =</span> <span class="st">"HLM_Results.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table style="border-collapse:collapse; border:none;">
+<tbody><tr>
+<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
+<th colspan="5" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">ssisss c</th>
+<th colspan="5" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">ssispb c</th>
+</tr>
+<tr>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">std. Beta</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">standardized CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">Estimates</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col8">std. Beta</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col9">CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  0">standardized CI</td>
+<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  1">p</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-1.21</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.05</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-Inf&nbsp;–&nbsp;Inf</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-Inf&nbsp;–&nbsp;Inf</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.303</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">1.11</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.08</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">-Inf&nbsp;–&nbsp;Inf</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">-Inf&nbsp;–&nbsp;Inf</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">0.130</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">ppvtst c</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.10</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.06</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-Inf&nbsp;–&nbsp;Inf</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-Inf&nbsp;–&nbsp;Inf</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>0.040</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">-0.04</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">-0.04</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">-Inf&nbsp;–&nbsp;Inf</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">-Inf&nbsp;–&nbsp;Inf</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">0.147</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">mlasm c</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.56</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.21</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-Inf&nbsp;–&nbsp;Inf</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-Inf&nbsp;–&nbsp;Inf</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">-0.41</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">-0.10</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">-Inf&nbsp;–&nbsp;Inf</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">-Inf&nbsp;–&nbsp;Inf</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1"><strong>0.002</strong></td>
+</tr>
+<tr>
+<td colspan="11" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">406.53</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">130.64</td>
+</tr>
+
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">125.69 <sub>pkschlid</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">52.67 <sub>pkschlid</sub></td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">0.24</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">0.29</td>
+
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">132 <sub>pkschlid</sub></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">132 <sub>pkschlid</sub></td>
+</tr><tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="5">1388</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="5">1388</td>
+</tr>
+<tr>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">0.063 / 0.285</td>
+<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">0.016 / 0.299</td>
+</tr>
+
+</tbody></table>
+
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"HLM_Results.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="mypost_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(model_behavior))</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(model_behavior))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="mypost_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid figure-img" width="672"></p>
+<p><embed src="HLM_Results.html" class="img-fluid"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="checking-homoscedasticity-variance-consistency" class="level3">
-<h3 class="anchored" data-anchor-id="checking-homoscedasticity-variance-consistency"><strong>Checking Homoscedasticity (Variance Consistency)</strong></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check Homoscedasticity</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(model_social), <span class="fu">resid</span>(model_social))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="mypost_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(model_behavior), <span class="fu">resid</span>(model_behavior))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="mypost_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion"><strong>Conclusion</strong></h2>
+<p>Higher vocabulary scores significantly predict better social skills (B = 0.45, p &lt; .001), while mathematical language also plays a role (B = 0.30, p &lt; .01). The ICC values suggest that school-level factors account for 21% of variance in social skills and 28% in problem behavior, emphasizing the importance of school environments in shaping social outcomes. Effect size measures confirm that these models explain a significant proportion of variance in preschoolers’ social and behavioral outcomes.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
