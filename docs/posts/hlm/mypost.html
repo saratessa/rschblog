@@ -22,40 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -102,11 +68,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<script src="../../site_libs/viz-1.8.2/viz.js"></script>
-<link href="../../site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-<script src="../../site_libs/grViz-binding-1.0.11/grViz.js"></script>
 
 
 <link rel="stylesheet" href="../../custom.css">
@@ -202,333 +163,98 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="examining-the-role-of-mathematical-language-in-preschoolers-social-and-behavioral-outcomes-a-hierarchical-linear-modeling-approach" class="level2">
 <h2 class="anchored" data-anchor-id="examining-the-role-of-mathematical-language-in-preschoolers-social-and-behavioral-outcomes-a-hierarchical-linear-modeling-approach">Examining the Role of Mathematical Language in Preschoolers’ Social and Behavioral Outcomes: A Hierarchical Linear Modeling Approach</h2>
-<p>The present study used a sample of 558 preschool children (Mage = 57.75 months, SD = 3.71). Monthly family income ranged from $0 to $5539 (M = $1508.18, SD = $892.92). Among the sample, 44% of the children were African American, 32% were Caucasian, 12% were Hispanic, 11% were multiracial, and 1% were Asian.</p>
-<ul>
-<li>RQ1: Does vocabulary and mathematical language predict social skills in preschoolers?</li>
-</ul>
-<p>Hypothesis 1: Higher vocabulary and math language will be associated with better social skills.</p>
-<ul>
-<li>RQ2: Does vocabulary and mathematical language predict problem behavior in preschoolers?</li>
-</ul>
-<p>Hypothesis 2: Lower vocabulary and math language will be associated with higher problem behavior.</p>
-<section id="reshaping-the-data-wide-to-long-format" class="level3">
-<h3 class="anchored" data-anchor-id="reshaping-the-data-wide-to-long-format"><strong>Reshaping the Data: Wide to Long Format</strong></h3>
-<p>Since the data contains multiple time points, I reshaped it into long format to prepare for modeling.</p>
+<p>Background &amp; Significance</p>
+<p><br>
+</p>
+<p>Importance of Social Skills for School Readiness and Later Success.</p>
+<p>Social-emotional skills are fundamental to children’s school readiness and long-term academic success. While early proficiency in math, reading, and attention skills are among the strongest predictors of later achievement (Duncan et al., 2007), social competence also plays a critical role in supporting academic performance (Webster-Stratton et al., 2004). Emotional adjustment and behavioral regulation contribute significantly to school readiness and can be strengthened through targeted interventions during preschool and early elementary years (Raver, 2002). Social-emotional learning (SEL) encompasses key competencies such as emotional literacy, empathy, communication, and problem-solving, all of which are essential for success in school and beyond (Denham &amp; Brown, 2010). Given the impact of these skills, policymakers are encouraged to expand educational mandates to include emotional and behavioral development as core programmatic goals, ensuring that children receive support for these competencies before entering formal schooling (Raver, 2002). Investing in children’s social-emotional development can yield long-term benefits, fostering both academic achievement and overall well-being.</p>
+<p><br>
+</p>
+<p>Impact of Problem Behavior on Learning and Peer Interactions.</p>
+<p>Problem behaviors in preschool settings can negatively affect both academic outcomes and social development. Early behavioral challenges in structured learning environments are linked to lower reading and math abilities, as well as decreased motivation and persistence in academic tasks (Bulotsky-Shearer et al., 2011). Difficulties in peer interactions further compound these issues, as children who struggle with self-regulation may be less engaged in socially mediated learning experiences (Bulotsky-Shearer et al., 2010). For students with emotional and behavioral disorders, the presence of paraprofessionals in close proximity—while intended to provide support—can sometimes hinder peer interactions in inclusive classrooms (Malmgren &amp; Causton-Theoharis, 2006). Additionally, when peer attention is primarily directed toward disruptive behaviors, those behaviors may become reinforced, leading to further classroom disruptions (Solomon &amp; Wahler, 1973). These findings underscore the need for early intervention strategies that promote positive peer interactions and behavioral self-regulation, which are critical for both social and academic development.</p>
+<p><br>
+</p>
+<p>Role of Language Skills</p>
+<p>Language skills serve as a foundation for various cognitive, social, and academic competencies. Mathematical language, in particular, has been shown to be a significant predictor of executive function development in preschoolers (Schmitt et al., 2019) and plays a key role in arithmetic fluency and word-problem solving in elementary school (Xu et al., 2021). Research suggests that both general and subject-specific language abilities contribute to mathematics learning, with mathematical vocabulary and text comprehension offering additional predictive value for arithmetic skills beyond general language proficiency (Ufer &amp; Bochnik, 2020). Moreover, mathematical language has been found to support the development of early numeracy skills such as set comparison and numeral identification, while emergent literacy skills like print knowledge contribute to specific numeracy competencies (Hornburg et al., 2024). These findings highlight the importance of fostering both general language development and domain-specific language skills to support children’s broader cognitive and academic growth.</p>
+<p><br>
+</p>
+<p>Unexplored link Between Language Skills link and Social Skills and Problem Behavior.</p>
+<p>While extensive research has examined the role of language skills in academic achievement, fewer studies have explored their impact on social skills and behavioral regulation. Language ability has been linked to executive functioning and behavioral outcomes, with lower language proficiency predicting increased inattentiveness, hyperactivity, and externalizing behaviors (Petersen et al., 2013). Children with weaker language skills tend to exhibit higher rates of aggression and lower levels of academic engagement (Chow &amp; Wehby, 2019). Moreover, executive functioning deficits—particularly in cognitive flexibility and inhibitory control—have been found to mediate the relationship between language ability and behavioral difficulties, with stronger effects observed in boys (Spataro et al., 2022). However, some studies suggest that when executive functioning is accounted for, language ability does not independently predict internalizing or externalizing behaviors (Karasinski, 2015). Parent-reported inhibition has emerged as a robust predictor of attention difficulties, internalizing behaviors, and externalizing behaviors (Karasinski, 2015). These findings suggest that language development may serve as a key target for interventions aimed at reducing behavioral challenges and improving social functioning in young children (Petersen et al., 2013).</p>
+<p><br>
+</p>
+<p><strong>Research Questions &amp; Hypotheses</strong></p>
+<p>This study examined the relationship between language skills and social skills development in preschool-aged children. Specifically, it sought to determine whether early vocabulary and mathematical language skills predict later social skills and problem behaviors.</p>
+<p><strong>Research Question 1:</strong> Does vocabulary and mathematical language predict social skills in preschoolers?</p>
+<p><strong>Hypothesis 1:</strong> Higher vocabulary and mathematical language skills will be associated with stronger social skills.</p>
+<p><strong>Research Question 2:</strong> Does vocabulary and mathematical language predict problem behavior in preschoolers?</p>
+<p><strong>Hypothesis 2:</strong> Lower vocabulary and mathematical language skills will be associated with higher levels of problem behavior.</p>
+<p><br>
+</p>
+<p><strong>Methods</strong></p>
+<p>Participants</p>
+<p>Participants were drawn from a larger quasi-experimental study evaluating a state-funded prekindergarten pilot program. The study followed two cohorts of preschool-aged children (N = 558) enrolled in either a state-funded prekindergarten program (n = 376) or an alternative early childhood education setting (n = 182) that accepted Child Care Development Funds. The sample was racially and ethnically diverse, consisting of 44% African American, 32% Caucasian, 12% Hispanic, 11% multiracial, and 1% Asian children. All families met program eligibility criteria, indicating household incomes below 127% of the federal poverty level. At the initial fall assessment, children ranged in age from 44.84 to 70.62 months (M = 57.75, SD = 3.71), and by the spring assessment, they ranged from 49.48 to 74.17 months (M = 62.69, SD = 3.64). The majority (94%) resided in urban communities, with 5% in rural and 1% in suburban areas.</p>
+<p><br>
+</p>
+<p>Procedure and Measures</p>
+<p>Vocabulary was assessed using the Peabody Picture Vocabulary Test (PPVT) at two time points: Time 1 (PPVT_T1) and Time 2 (PPVT_T2). The PPVT is a widely used measure of receptive vocabulary, in which children are asked to select the picture that best corresponds to a spoken word. Higher scores indicate greater vocabulary knowledge. Mathematical language skills were evaluated at Time 1 (ML_T1) and Time 2 (ML_T2) using [describe instrument]. This measure assesses children’s ability to understand and use mathematical language, which is foundational for later numeracy development. Social skills were measured using the Social Skills Improvement System (SSIS) Social Skills scale at both time points (SSISSS_T1 and SSISSS_T2). The SSIS Social Skills scale evaluates prosocial behaviors such as cooperation, responsibility, and self-control. Higher scores indicate stronger social competence. Problem behavior was assessed using the SSIS Problem Behavior scale at Time 1 (SSISPB_T1) and Time 2 (SSISPB_T2). This scale measures a range of maladaptive behaviors, including externalizing and internalizing difficulties. Higher scores reflect greater behavioral concerns.</p>
+<p><br>
+</p>
+<p>Analytical Approach</p>
+<p>All analyses were conducted using R Statistical Software (v4.1.2; R Core Team, 2021), employing hierarchical linear modeling (HLM) with the lme4 package (Bates et al., 2015) to account for the nested structure of the data (children within schools). Given this dependency, random intercept models were used to control for school-level variance in vocabulary, math language, social skills, and problem behavior.</p>
+<p>To address missing data, mean imputation was applied. The extent of missingness varied across variables, with SSISSS_T2 having the highest number of missing values (n = 142). Due to the relatively small proportion of missing data, mean imputation was chosen to maintain statistical power and minimize bias.</p>
+<p>The modeling process proceeded in three stages. First, null models (intercept-only models) were constructed to estimate the proportion of variance attributable to school-level clustering via intraclass correlation coefficients (ICCs). Next, full models tested the predictive effects of vocabulary and mathematical language (Time 1) on social skills and problem behavior (Time 2). Predictors were grand-mean centered for interpretability. Finally, cross-lagged models were estimated to examine bidirectional relationships, assessing whether early language skills predicted later social-emotional outcomes and vice versa. Cross-lagged relationships between mathematical language and social skills were also explored.</p>
+<p>Model parameters were estimated using restricted maximum likelihood (REML). Fixed effects were evaluated using Satterthwaite’s approximation for degrees of freedom, and model fit was assessed using Nakagawa’s R², which provides both marginal R² (variance explained by fixed effects) and conditional R² (total variance explained, including random effects).</p>
+<p><br>
+</p>
+<p>Model Specification</p>
+<p>Null models were first estimated for each outcome variable (vocabulary, math language, social skills, and problem behavior) to establish baseline school-level variance. These models included only a random intercept for school, allowing for the calculation of ICCs.</p>
+<p>Full models were then constructed to examine whether vocabulary and mathematical language at Time 1 predicted social skills and problem behavior at Time 2. These models included Time 1 vocabulary and mathematical language as fixed effects while allowing intercepts to vary by school.</p>
+<p>To assess bidirectional influences, cross-lagged models tested whether early language skills (Time 1) predicted later social skills and problem behavior (Time 2), as well as whether early social-emotional skills influenced later language development. Additionally, reciprocal effects between mathematical language and social skills were explored.</p>
+<p>All models were estimated using REML, and statistical significance of fixed effects was determined using Satterthwaite’s approximation for degrees of freedom. Model fit was evaluated using Nakagawa’s R², distinguishing between marginal and conditional effects.</p>
+<p><br>
+</p>
+<p><strong>Results</strong></p>
+<p>The findings suggest that early mathematical language skills play a significant role in later social development, while the predictive effects of vocabulary and problem behavior were more limited. Math language at Time 1 significantly predicted social skills at Time 2, suggesting that exposure to mathematical language may contribute to the development of social competence in preschool-aged children. Vocabulary at Time 1 was not a significant predictor of social skills or problem behavior but was a significant predictor of vocabulary at Time 2, emphasizing its stability over time. Social skills at Time 1 significantly predicted both vocabulary and math language at Time 2, highlighting a reciprocal relationship between these developmental domains. While problem behavior at Time 1 did not significantly predict later vocabulary, it was negatively associated with math language at Time 2, suggesting that behavioral difficulties may interfere with the development of mathematical language but have a more limited impact on general vocabulary growth. Math language at Time 1 was a significant predictor of social skills at Time 2 but did not predict later problem behavior, further underscoring the importance of mathematical language in early childhood development.</p>
+<p>These results support the idea that mathematical language and social skills are interconnected developmental processes. The findings suggest that fostering early mathematical language skills may have benefits beyond academic achievement, potentially promoting social competence in preschool-aged children. However, the lack of significant predictive effects for vocabulary and problem behavior on later outcomes indicates that additional factors likely contribute to these developmental trajectories.</p>
+<p><br>
+</p>
+<p>Intraclass Correlations and Model Fit</p>
+<p>Intraclass correlations (ICCs) were calculated for each null model to assess the proportion of variance attributable to school-level differences. The ICC for vocabulary at Time 2 was 0.121, indicating that approximately 12.1% of the variance in vocabulary scores was due to between-school differences. The ICC for social skills at Time 2 was 0.260, suggesting that 26.0% of the variance in social skills was explained by school-level factors. Similarly, the ICC for problem behavior at Time 2 was 0.302, while for math language at Time 2, it was 0.104, indicating that 30.2% and 10.4% of their respective variance were accounted for by school-level differences. These ICC values confirm the need for hierarchical linear modeling (HLM) to account for the nested structure of the data.</p>
+<p>Model fit was evaluated using Nakagawa’s R², which provides both marginal R² (explained variance due to fixed effects) and conditional R² (total explained variance, including fixed and random effects). The conditional R² for vocabulary was 0.290, with a marginal R² of 0.027. Similarly, the conditional R² for social skills was 0.290, with a marginal R² of 0.027. For problem behavior, the conditional R² was 0.303, with a marginal R² of 0.003, indicating that the fixed effects accounted for a minimal proportion of variance in problem behavior. The highest explained variance was observed for math language, with a conditional R² of 0.366 and a marginal R² of 0.296, suggesting that fixed predictors accounted for a substantial portion of the variance in mathematical language development.</p>
+<p><br>
+</p>
+<p>Predictors of Social Skills and Problem Behavior</p>
+<p>To examine whether vocabulary and math language predicted social skills and problem behavior, hierarchical linear models were estimated. In the full model predicting social skills at Time 2, math language at Time 1 was a significant predictor (β = 0.870, SE = 0.282, p = 0.002), indicating that children with stronger early math language skills exhibited greater social competence over time. However, vocabulary at Time 1 was not a significant predictor of social skills at Time 2 (β = 0.065, SE = 0.062, p = 0.300), suggesting that early vocabulary knowledge did not contribute meaningfully to later social skill development.</p>
+<p>In the full model predicting problem behavior at Time 2, neither vocabulary at Time 1 (β = -0.009, SE = 0.036, p = 0.799) nor math language at Time 1 (β = -0.167, SE = 0.162, p = 0.304) were significant predictors. These results indicate that early language abilities, including both vocabulary and mathematical language, did not significantly influence later problem behavior after accounting for school-level variance.</p>
+<p><br>
+</p>
+<p>Cross-Lagged Effects</p>
+<p>Cross-lagged models were estimated to assess bidirectional relationships between language, social skills, and behavior over time. Vocabulary at Time 1 significantly predicted social skills at Time 2 (β = 0.176, SE = 0.051, p &lt; 0.001), indicating that stronger vocabulary skills were associated with greater social competence later in development. However, vocabulary did not significantly predict problem behavior at Time 2 (β = -0.031, SE = 0.029, p = 0.295), suggesting that early vocabulary knowledge was not a strong predictor of later behavioral difficulties.</p>
+<p>Social skills at Time 1 significantly predicted vocabulary at Time 2 (β = 0.099, SE = 0.025, p &lt; 0.001), providing evidence of a reciprocal relationship between language and social competence. Additionally, social skills at Time 1 were positively associated with math language at Time 2 (β = 0.027, SE = 0.005, p &lt; 0.001), suggesting that early social competence may facilitate the development of mathematical language skills.</p>
+<p>Problem behavior at Time 1 was not a significant predictor of vocabulary at Time 2 (β = -0.077, SE = 0.044, p = 0.079) but was a significant negative predictor of math language at Time 2 (β = -0.026, SE = 0.008, p = 0.002). These results indicate that higher levels of early problem behavior were associated with lower math language skills later in development, suggesting that behavioral difficulties may disrupt language learning in this domain.</p>
+<p>Math language at Time 1 significantly predicted social skills at Time 2 (β = 1.040, SE = 0.230, p &lt; 0.001), demonstrating that early mathematical language skills were linked to stronger social competence over time. However, math language did not significantly predict problem behavior at Time 2 (β = -0.191, SE = 0.132, p = 0.148), indicating that while mathematical language was associated with social development, it was not a key determinant of later behavioral outcomes.</p>
+<section id="discussion" class="level3">
+<h3 class="anchored" data-anchor-id="discussion"><strong>Discussion</strong></h3>
+<p>This study examined the longitudinal relationships between vocabulary, mathematical language, social skills, and problem behavior in preschool-aged children using hierarchical linear modeling (HLM). The findings revealed that mathematical language at Time 1 was a significant predictor of social skills at Time 2, suggesting that early exposure to mathematical language may play a role in fostering social competence. However, vocabulary at Time 1 did not significantly predict social skills or problem behavior at Time 2, though it did predict later vocabulary development, reinforcing its stability over time. Cross-lagged analyses further demonstrated the bidirectional nature of these relationships, showing that early social skills significantly predicted both vocabulary and mathematical language at Time 2. In contrast, early problem behavior negatively predicted later mathematical language development but did not significantly impact vocabulary growth or subsequent behavioral outcomes.</p>
+<p>These findings contribute to the growing body of research highlighting the interdependence of cognitive-linguistic and social-emotional development in early childhood. The significant association between early social skills and later vocabulary and mathematical language suggests that children with stronger social competencies may be better positioned to engage in language-rich learning experiences that promote linguistic development. The predictive relationship between mathematical language and social skills may reflect the role of structured classroom environments and peer interactions in fostering both cognitive and social competencies. In contrast, the absence of a significant relationship between vocabulary and later problem behavior suggests that while language skills are important for many aspects of development, they may not be a primary driver of behavioral difficulties.</p>
+<p>Furthermore, the finding that early problem behavior negatively predicted later mathematical language development suggests that behavioral challenges in preschool may interfere with the acquisition of domain-specific language skills. This aligns with prior research indicating that children with self-regulation difficulties often struggle with tasks requiring sustained engagement and complex cognitive processing (Chow &amp; Wehby, 2019; Spataro et al., 2022). The lack of a significant relationship between problem behavior and later vocabulary, however, suggests that general language acquisition may be less vulnerable to early behavioral difficulties than mathematical language development, which may require more structured, context-dependent learning experiences.</p>
+<p><br>
+</p>
+<p><strong>Implications</strong></p>
+<p>The findings of this study have important implications for early childhood education and intervention strategies. The strong bidirectional associations between social skills and language development suggest that interventions targeting social competencies may have benefits beyond behavioral regulation, extending to linguistic and cognitive development. This underscores the need for integrated early education approaches that simultaneously support social-emotional and academic growth rather than treating these domains as separate.</p>
+<p>Moreover, the significant influence of early mathematical language on later social skills suggests that numeracy instruction should not be viewed solely in the context of academic achievement but also as a potential contributor to social competence. Classroom environments that incorporate mathematical discussions, collaborative problem-solving, and peer interactions may provide valuable opportunities for children to develop both cognitive and interpersonal skills. By embedding mathematical language into socially engaging activities, educators can foster the dual development of academic and social competencies.</p>
+<p>The negative impact of early problem behavior on later mathematical language development further highlights the importance of early behavioral interventions. Children exhibiting behavioral difficulties in preschool may require additional support to ensure they are not at a disadvantage in acquiring foundational academic skills. Behavioral interventions that emphasize self-regulation and engagement in learning activities could help mitigate the risk of academic difficulties associated with early problem behaviors. Future research should explore targeted strategies for supporting children with early behavioral challenges, particularly in structured learning environments where mathematical language acquisition is emphasized.</p>
+<p>These findings suggest that fostering strong social skills, supporting mathematical language development, and addressing early behavioral challenges are all critical components of comprehensive early childhood education. By integrating social, linguistic, and behavioral interventions, educators and policymakers can better support the holistic development of preschool-aged children, promoting both academic readiness and social success.</p>
 </section>
-<section id="handling-missing-data-using-multiple-imputation" class="level3">
-<h3 class="anchored" data-anchor-id="handling-missing-data-using-multiple-imputation"><strong>Handling Missing Data Using Multiple Imputation</strong></h3>
-<p>Before analysis, I handle missing values using multiple imputation to prevent biased estimates.</p>
-<p><code>{colSums(is.na(data_long))}</code></p>
+<section id="limitations-and-future-directions" class="level3">
+<h3 class="anchored" data-anchor-id="limitations-and-future-directions"><strong>Limitations and Future Directions</strong></h3>
+<p>While the study provides valuable insights into the relationships between early language, social skills, and behavior, several limitations should be noted. First, the use of mean imputation to address missing data, while effective in retaining sample size, may have introduced bias by reducing variability in the data. Future research should consider multiple imputation or full information maximum likelihood estimation to more robustly handle missingness.</p>
+<p>Second, the study design, while longitudinal, does not allow for causal inference. Although cross-lagged models provide evidence of temporal precedence, experimental or quasi-experimental designs would be needed to establish causal mechanisms underlying these associations. Future studies could incorporate randomized interventions targeting specific domains (e.g., social-emotional learning programs, language interventions) to examine their direct and indirect effects on cognitive and behavioral outcomes.</p>
+<p>Third, the reliance on a single level of nesting (children within schools) does not account for potential classroom-level effects, which may play a role in shaping these developmental pathways. Future studies could extend the current model by incorporating classroom-level predictors, such as teacher interactions, instructional quality, and peer dynamics, to provide a more comprehensive understanding of these relationships.</p>
+<p>Finally, while the study focused on preschool-aged children, it remains unclear whether these associations persist into later childhood or whether they are moderated by individual differences such as socioeconomic status, home literacy environment, or executive functioning skills. Future research should examine these relationships over a longer developmental span and explore potential moderators that may strengthen or weaken these associations.</p>
+
+
 </section>
-</section>
-<section id="centering-predictors" class="level2">
-<h2 class="anchored" data-anchor-id="centering-predictors"><strong>Centering Predictors</strong></h2>
-<p>To improve interpretability and avoid multicollinearity, all predictor variables are centered around their mean.</p>
-<section id="building-the-null-models" class="level3">
-<h3 class="anchored" data-anchor-id="building-the-null-models"><strong>Building the Null Models</strong></h3>
-<p>First I estimated an empty model with only a random intercept for <code>pkschlid</code> to examine the proportion of variance explained at the school level.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>null_model_social <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssisss_c <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>null_model_behavior <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssispb_c <span class="sc">~</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="computing-the-intraclass-correlation-coefficient-icc" class="level3">
-<h3 class="anchored" data-anchor-id="computing-the-intraclass-correlation-coefficient-icc"><strong>Computing the Intraclass Correlation Coefficient (ICC)</strong></h3>
-<p>The ICC measures how much variance in social skills and problem behavior is due to differences between schools.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>icc_social <span class="ot">&lt;-</span> <span class="fu">icc</span>(null_model_social)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>icc_behavior <span class="ot">&lt;-</span> <span class="fu">icc</span>(null_model_behavior)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(icc_social)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># Intraclass Correlation Coefficient
-
-    Adjusted ICC: 0.208
-  Unadjusted ICC: 0.208</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(icc_behavior)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># Intraclass Correlation Coefficient
-
-    Adjusted ICC: 0.280
-  Unadjusted ICC: 0.280</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="stepwise-model-building" class="level2">
-<h2 class="anchored" data-anchor-id="stepwise-model-building"><strong>Stepwise Model Building</strong></h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>model_social_voc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssisss_c <span class="sc">~</span> ppvtst_c <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>model_behavior_voc <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssispb_c <span class="sc">~</span> ppvtst_c <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>model_social_full <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssisss_c <span class="sc">~</span> ppvtst_c <span class="sc">+</span> mlasm_c <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>model_behavior_full <span class="ot">&lt;-</span> <span class="fu">lmer</span>(ssispb_c <span class="sc">~</span> ppvtst_c <span class="sc">+</span> mlasm_c <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> pkschlid), <span class="at">data =</span> data_long)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_social_voc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
-lmerModLmerTest]
-Formula: ssisss_c ~ ppvtst_c + (1 | pkschlid)
-   Data: data_long
-
-REML criterion at convergence: 12493.2
-
-Scaled residuals: 
-     Min       1Q   Median       3Q      Max 
--3.06122 -0.67381  0.02478  0.69968  2.69615 
-
-Random effects:
- Groups   Name        Variance Std.Dev.
- pkschlid (Intercept) 120.1    10.96   
- Residual             421.8    20.54   
-Number of obs: 1388, groups:  pkschlid, 132
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)   -1.17200    1.16120  123.13247  -1.009    0.315    
-ppvtst_c       0.28603    0.03855 1372.09074   7.420 2.04e-13 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Correlation of Fixed Effects:
-         (Intr)
-ppvtst_c 0.023 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_behavior_voc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite's method [
-lmerModLmerTest]
-Formula: ssispb_c ~ ppvtst_c + (1 | pkschlid)
-   Data: data_long
-
-REML criterion at convergence: 10909.6
-
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--3.1604 -0.7043 -0.1587  0.5776  4.1024 
-
-Random effects:
- Groups   Name        Variance Std.Dev.
- pkschlid (Intercept)  51.93    7.206  
- Residual             131.67   11.475  
-Number of obs: 1388, groups:  pkschlid, 132
-
-Fixed effects:
-              Estimate Std. Error         df t value Pr(&gt;|t|)    
-(Intercept)    1.10107    0.73122  126.50617   1.506    0.135    
-ppvtst_c      -0.08889    0.02168 1358.14168  -4.100 4.37e-05 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Correlation of Fixed Effects:
-         (Intr)
-ppvtst_c 0.022 </code></pre>
-</div>
-</div>
-</section>
-<section id="extracting-and-interpreting-results" class="level2">
-<h2 class="anchored" data-anchor-id="extracting-and-interpreting-results"><strong>Extracting and Interpreting Results</strong></h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fixef_social <span class="ot">&lt;-</span> <span class="fu">fixef</span>(model_social_full)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fixef_behavior <span class="ot">&lt;-</span> <span class="fu">fixef</span>(model_behavior_full)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fixef_social)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(Intercept)    ppvtst_c     mlasm_c 
--1.20897692  0.09676041  1.56388028 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(fixef_behavior)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(Intercept)    ppvtst_c     mlasm_c 
- 1.11284984 -0.03892677 -0.41230580 </code></pre>
-</div>
-</div>
-</section>
-<section id="checking-homoscedasticity" class="level2">
-<h2 class="anchored" data-anchor-id="checking-homoscedasticity"><strong>Checking Homoscedasticity</strong></h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="mypost_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="mypost_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="compute-final-icc-and-effect-size" class="level2">
-<h2 class="anchored" data-anchor-id="compute-final-icc-and-effect-size"><strong>Compute Final ICC and Effect Size</strong></h2>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># Intraclass Correlation Coefficient
-
-    Adjusted ICC: 0.236
-  Unadjusted ICC: 0.221</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># Intraclass Correlation Coefficient
-
-    Adjusted ICC: 0.287
-  Unadjusted ICC: 0.283</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            R2m       R2c
-[1,] 0.06329894 0.2845134</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            R2m       R2c
-[1,] 0.01633917 0.2989862</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>DiagrammeR<span class="sc">::</span><span class="fu">grViz</span>(</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"digraph G {</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="st">    rankdir=LR;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="st">    node [shape = rectangle, style = filled, color = lightblue];</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="st">    Vocabulary [label = 'Vocabulary'];</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="st">    MathLanguage [label = 'Mathematical Language'];</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="st">    SocialSkills [label = 'Social Skills'];</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="st">    ProblemBehavior [label = 'Problem Behavior'];</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="st">    Vocabulary -&gt; SocialSkills [label = 'β = 0.45'];</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="st">    Vocabulary -&gt; ProblemBehavior [label = 'β = -0.30'];</span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="st">    SocialSkills -&gt; Vocabulary [label = 'β = 0.25'];</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="st">    SocialSkills -&gt; MathLanguage [label = 'β = 0.20'];</span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="st">    ProblemBehavior -&gt; Vocabulary [label = 'β = -0.15'];</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="st">    ProblemBehavior -&gt; MathLanguage [label = 'β = -0.10'];</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="st">    MathLanguage -&gt; SocialSkills [label = 'β = 0.35'];</span></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="st">    MathLanguage -&gt; ProblemBehavior [label = 'β = -0.25'];</span></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="st">  }"</span></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="grViz html-widget html-fill-item" id="htmlwidget-133641a14480094a8a28" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-133641a14480094a8a28">{"x":{"diagram":"digraph G {\n    rankdir=LR;\n    node [shape = rectangle, style = filled, color = lightblue];\n\n    Vocabulary [label = \"Vocabulary\"];\n    MathLanguage [label = \"Mathematical Language\"];\n    SocialSkills [label = \"Social Skills\"];\n    ProblemBehavior [label = \"Problem Behavior\"];\n\n    Vocabulary -> SocialSkills [label = \"β = 0.45\"];\n    Vocabulary -> ProblemBehavior [label = \"β = -0.30\"];\n    SocialSkills -> Vocabulary [label = \"β = 0.25\"];\n    SocialSkills -> MathLanguage [label = \"β = 0.20\"];\n    ProblemBehavior -> Vocabulary [label = \"β = -0.15\"];\n    ProblemBehavior -> MathLanguage [label = \"β = -0.10\"];\n    MathLanguage -> SocialSkills [label = \"β = 0.35\"];\n    MathLanguage -> ProblemBehavior [label = \"β = -0.25\"];\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="final-model-summary-and-apa-tables" class="level2">
-<h2 class="anchored" data-anchor-id="final-model-summary-and-apa-tables"><strong>Final Model Summary and APA Tables</strong></h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">tab_model</span>(model_social_full, model_behavior_full, <span class="at">show.std =</span> <span class="cn">TRUE</span>, <span class="at">show.ci =</span> <span class="cn">TRUE</span>, <span class="at">show.p =</span> <span class="cn">TRUE</span>, <span class="at">file =</span> <span class="st">"HLM_Results.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table style="border-collapse:collapse; border:none;">
-<tbody><tr>
-<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">&nbsp;</th>
-<th colspan="5" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">ssisss c</th>
-<th colspan="5" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">ssispb c</th>
-</tr>
-<tr>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">Predictors</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">Estimates</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">std. Beta</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">CI</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">standardized CI</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">p</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col7">Estimates</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col8">std. Beta</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  col9">CI</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  0">standardized CI</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  1">p</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">(Intercept)</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-1.21</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-0.05</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-Inf&nbsp;–&nbsp;Inf</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-Inf&nbsp;–&nbsp;Inf</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.303</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">1.11</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">0.08</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">-Inf&nbsp;–&nbsp;Inf</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">-Inf&nbsp;–&nbsp;Inf</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">0.130</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">ppvtst c</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.10</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.06</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-Inf&nbsp;–&nbsp;Inf</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-Inf&nbsp;–&nbsp;Inf</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>0.040</strong></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">-0.04</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">-0.04</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">-Inf&nbsp;–&nbsp;Inf</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">-Inf&nbsp;–&nbsp;Inf</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1">0.147</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">mlasm c</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">1.56</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">0.21</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-Inf&nbsp;–&nbsp;Inf</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">-Inf&nbsp;–&nbsp;Inf</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  "><strong>&lt;0.001</strong></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col7">-0.41</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col8">-0.10</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  col9">-Inf&nbsp;–&nbsp;Inf</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  0">-Inf&nbsp;–&nbsp;Inf</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  1"><strong>0.002</strong></td>
-</tr>
-<tr>
-<td colspan="11" style="font-weight:bold; text-align:left; padding-top:.8em;">Random Effects</td>
-</tr>
-
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">σ<sup>2</sup></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">406.53</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">130.64</td>
-</tr>
-
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">τ<sub>00</sub></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">125.69 <sub>pkschlid</sub></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">52.67 <sub>pkschlid</sub></td>
-
-</tr><tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">ICC</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">0.24</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">0.29</td>
-
-</tr><tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">N</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">132 <sub>pkschlid</sub></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">132 <sub>pkschlid</sub></td>
-</tr><tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">Observations</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="5">1388</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="5">1388</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">Marginal R<sup>2</sup> / Conditional R<sup>2</sup></td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">0.063 / 0.285</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="5">0.016 / 0.299</td>
-</tr>
-
-</tbody></table>
-
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"HLM_Results.html"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><embed src="HLM_Results.html" class="img-fluid"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion"><strong>Conclusion</strong></h2>
-<p>Higher vocabulary scores significantly predict better social skills (B = 0.45, p &lt; .001), while mathematical language also plays a role (B = 0.30, p &lt; .01). The ICC values suggest that school-level factors account for 21% of variance in social skills and 28% in problem behavior, emphasizing the importance of school environments in shaping social outcomes. Effect size measures confirm that these models explain a significant proportion of variance in preschoolers’ social and behavioral outcomes.</p>
-
-
 </section>
 
 </main> <!-- /main -->
