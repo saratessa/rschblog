@@ -51,7 +51,7 @@ Homogeneous Achievement Grouping (HAG) provides a structured and research-backed
 
 Extensive research confirms the effectiveness of HAG in promoting academic success. Slavin (1987) found that within-class ability grouping for mathematics (median effect size = +.34) and cross-grade ability grouping for reading using the Joplin Plan (median effect size = +.45) both produced substantial positive impacts on student achievement. These findings highlight that reducing student heterogeneity in specific skill areas while adjusting instruction to students' needs leads to meaningful academic gains.
 
-```{r, echo=FALSE}
+```{r inclusion_performance, echo=FALSE}
 
 library(ggplot2)
 
@@ -121,7 +121,7 @@ Geographic location significantly influences inclusive education practices. Stud
 
 Analysis of publicly available education data from Oregon and Washington highlights several structural challenges in achieving inclusive education. Washington reports a per-pupil expenditure of \$18,649, with 50.3% of students demonstrating grade-level proficiency in ELA and 39.7% in math (Washington Office of Superintendent of Public Instruction, 2024).
 
-```{r, echo=FALSE}
+```{r inclusion_performance, echo=FALSE}
 
 library(ggplot2)
 
@@ -147,7 +147,7 @@ ggplot(data_funding, aes(x = Funding_Per_Student, y = Inclusion_Rate, label = St
 
 ```
 
-```{r, echo=FALSE}
+```{r inclusion_performance, echo=FALSE}
 
 library(ggplot2)
 
