@@ -2,7 +2,7 @@
 title: "PROTOCOL: Individual participant data meta analysis of FIT learining 40 hour enrollment"
 author: "Saratessa"
 date: "2025-09-19"
-categories: [Precision Teaching, Math Instruction, Meta Analysis]
+categories: [Precision Teaching (PT), Math Instruction, Meta Analysis]
 ---
 
 This post shares a PROTOCOL for a meta analysis that is being conducted as a student research project. It has not been peer-reviewed or formally submitted for publication.Please do not cite or distribute without permission.
