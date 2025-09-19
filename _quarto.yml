@@ -1,21 +1,25 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - CV_PalosS.pdf
+    - custom.css
+    - _navbar.html
 
 website:
-site-url: "https://saratessa.github.io/rschblog"
-  title: "Saratessa Palos MA BCBA LBA"  
+  site-url: https://saratessa.github.io/rschblog
+  title: "Saratessa Palos MA BCBA LBA"
   navbar:
-    left: []  
+    left: []
     right:
       - text: "About"
         href: about.qmd
       - text: "CV"
-        href: CV_PalosS.pdf  
-      - href: "https://www.santinoconsulting.com/"
-        text: "My Practice"
+        href: CV_PalosS.pdf
+      - text: "My Practice"
+        href: https://www.santinoconsulting.com/
       - icon: github
-        href: "https://github.com/saratessa"
+        href: https://github.com/saratessa
   page-footer:
     center: "© 2025 Saratessa Palos | Santino Consulting"
 
@@ -27,3 +31,4 @@ format:
       in-header: _navbar.html
 
 editor: visual
+
