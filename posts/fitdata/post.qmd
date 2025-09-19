@@ -5,7 +5,9 @@ date: "2025-09-19"
 categories: [Precision Teaching (PT), Math Instruction, Meta Analysis]
 ---
 
-*This post shares a PROTOCOL for a meta analysis that is being conducted as a student research project. It has not been peer-reviewed or formally submitted for publication.Please do not cite or distribute without permission.*
+*This post shares a PROTOCOL for a meta analysis that is being conducted as a student research project. It has not been peer-reviewed or formally submitted for publication.*
+
+*Please do not cite or distribute without permission.*
 
 In the most recent National Assessment of Educational Progress (NAEP), both reading and mathematics scores among fourth-grade students declined significantly. Only 63% of fourth graders scored at or above the Basic level in reading, while 37% performed below that level (National Center for Education Statistics \[NCES\]). In mathematics, average scores dropped by five points in 2022 compared to 2019, reaching the lowest level since 2005 (NCES). Broader national data indicate that approximately 40% of students across the country are unable to read at a basic level, with nearly 70% of low-income fourth graders struggling with literacy (The National Literacy Institute, 2023).
 
