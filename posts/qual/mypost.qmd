@@ -3,7 +3,7 @@ title: "Understanding, Expressing, and Regulating Emotions: A Systematic Scoping
 Interventions for Young Children with Autism Spectrum Disorder"
 author: "Saratessa Palos"
 date: "2025-03-20"
-categories: [Cross-Lagged Pannel Model, Early Childhood]
+categories: [Systematic Lit Review, Autism, Early Childhood]
 ---
 
 *This is a working draft of a manuscript that is being prepared for journal submission. Content is subject to change after peer review. Feedback is welcome.*
