@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.42">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Saratessa">
-<meta name="dcterms.date" content="2025-03-19">
+<meta name="dcterms.date" content="2025-09-19">
 
-<title>Exploring Precision Teaching (PT) Math pinpoints – Saratessa Palos MA BCBA LBA</title>
+<title>PROTOCOL: Individual participant data meta analysis of FIT learining 40 hour enrollment – Saratessa Palos MA BCBA LBA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,15 +32,17 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-79108a0fc1995748cbd19a5b0e3e3e7c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-ff63373b1067ca6f91cf1456aa1f00a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,13 +75,15 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../../custom.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Saratessa Palos MA BCBA LBA</span>
     </a>
@@ -101,8 +105,8 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://bsky.app/profile/saratessa.bsky.social"> 
-<span class="menu-text">Bluesky</span></a>
+    <a class="nav-link" href="https://www.santinoconsulting.com/"> 
+<span class="menu-text">My Practice</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/saratessa"> <i class="bi bi-github" role="img">
@@ -120,12 +124,11 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Exploring Precision Teaching (PT) Math pinpoints</h1>
+      <h1 class="title">PROTOCOL: Individual participant data meta analysis of FIT learining 40 hour enrollment</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Precision Teaching</div>
                 <div class="quarto-category">Math Instruction</div>
-                <div class="quarto-category">Hierarchical Clustering</div>
-                <div class="quarto-category">Multiple Regression</div>
+                <div class="quarto-category">Meta Analysis</div>
               </div>
                   </div>
   </div>
@@ -143,7 +146,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 19, 2025</p>
+        <p class="date">September 19, 2025</p>
       </div>
     </div>
     
@@ -162,338 +165,291 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This following post utilized data from a private precision teaching clinic in the United States. Each student in this data has a score for accuracy and fluency of math pinpoints at intake and then their score for those skills on a CBM after 40 hours of instruction.</p>
-<p>This report includes: <strong>Sample visualizations</strong> to understand the sample of participants. <strong>Data reshaping</strong> to convert the dataset into a tidy format. <strong>Analysis for three research questions</strong> using clustering, regression, and ANCOVA.</p>
-<p><strong>###Research Questions and Methods:###</strong></p>
-<ol type="1">
-<li><p><strong>What math skills, when grouped, predict other skills?</strong></p>
-<ul>
-<li>First <strong>Hierarchical clustering</strong> is used to identify skill groupings based on similar learning patterns.</li>
-</ul></li>
-<li><p><strong>What math skills predict outcomes on the CBM after 40 hours of instruction?</strong></p>
-<ul>
-<li>Next <strong>multiple regression modeling</strong> is applied to determine predictive relationships.</li>
-</ul></li>
-<li><p><strong>How do targeted versus untargeted math skills relate to CBM outcomes?</strong></p>
-<ul>
-<li><strong>ANCOVA (Analysis of Covariance)</strong> is used to examine differences between these skill types.</li>
-</ul></li>
-</ol>
-<p>Before loading the dataset, I cleaned it in a separate script to remove names and replace them with unique ID numbers for student privacy.</p>
-<p>In this project, the first step I took was to load all required R packages. For data manipulation (<code>tidyverse</code>), visualizations (<code>ggplot2</code>), clustering analysis (<code>cluster</code>), tidying model outputs (<code>broom</code>), and running regression models (<code>lme4</code>).</p>
-<p>Here are the visualizations of the sample participants.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<section id="reshape-data-to-tidy-format" class="level2">
-<h2 class="anchored" data-anchor-id="reshape-data-to-tidy-format">Reshape Data to Tidy Format</h2>
-<p>[edit this now that changes were made]I reshaped the dataset to a “tidy” format, where each row represents: Participant_ID, Grade Level, Diagnosis, Skill, Measure` (Intake Accuracy, Post Fluency, etc.), Score. I converted categorical variables to factors to avoid regression errors. And I removed levels with only one category to prevent contrast errors in regression.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Total rows: 124200 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>NA values in Score: 47403 </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Percentage NA: 38.16667 %</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 6
-  Column_1 Column_2 Column_3  Skill                                Measure Score
-     &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;                                &lt;chr&gt;   &lt;dbl&gt;
-1        3 None     2nd Grade Skip Count by 10 Forwards to 1,000 … &lt;NA&gt;       84
-2        3 None     2nd Grade Skip Count by 10 Forwards to 1,000 … &lt;NA&gt;      100
-3        3 None     2nd Grade Skip Count by 10 Forwards to 1,000 … &lt;NA&gt;       92
-4        3 None     2nd Grade Skip Count by 10 Forwards to 1,000 … &lt;NA&gt;      100
-5        3 None     2nd Grade Skip Count by 10 Forwards to 1,000 … &lt;NA&gt;        0
-6        3 None     2nd Grade Skip Count by 10 Backwards From 1,0… &lt;NA&gt;       NA</code></pre>
-</div>
-</div>
-<p>////// ## Answer Research Questions</p>
-<section id="q1-what-math-skills-when-grouped-predict-other-skills" class="level3">
-<h3 class="anchored" data-anchor-id="q1-what-math-skills-when-grouped-predict-other-skills"><strong>Q1: What math skills, when grouped, predict other skills?</strong></h3>
-<p>to address this I used a <strong>Correlation analysis</strong> to identify skills that <strong>improve together</strong>. Then I did <strong>Association rule mining</strong> to find patterns where mastering one skill predicts mastery of another. I then created the following visualizations: a <strong>correlation heatmap</strong> and <strong>association rule graph</strong>.</p>
-
-
+<p>This post shares a PROTOCOL for a meta analysis that is being conducted as a student research project. It has not been peer-reviewed or formally submitted for publication.Please do not cite or distribute without permission.</p>
+<p>In the most recent National Assessment of Educational Progress (NAEP), both reading and mathematics scores among fourth-grade students declined significantly. Only 63% of fourth graders scored at or above the Basic level in reading, while 37% performed below that level (National Center for Education Statistics [NCES]). In mathematics, average scores dropped by five points in 2022 compared to 2019, reaching the lowest level since 2005 (NCES). Broader national data indicate that approximately 40% of students across the country are unable to read at a basic level, with nearly 70% of low-income fourth graders struggling with literacy (The National Literacy Institute, 2023).</p>
+<p>These figures reflect widespread academic challenges, the cumulative nature of academic skills means that early deficits in foundational abilities compound over time, creating increasingly larger achievement gaps that become more difficult to remediate as students progress through school. Students who fail to achieve basic literacy and numeracy skills are more likely to require special education services, experience grade retention, and special education education services. The need for effective, efficient interventions that can accelerate academic skill development is imperative.</p>
+<section id="precision-teaching-and-reading" class="level2">
+<h2 class="anchored" data-anchor-id="precision-teaching-and-reading">Precision Teaching and Reading</h2>
+<p>Precision Teaching (PT) is a system for precisely defining and continuously measuring dimensional features of behavior, and analyzing performance on the Standard Celeration Chart to make timely and effective decisions that accelerate behavioral repertoires (Evans et al., 2021). PT as an instructional approach has shown benefits in developing fluency in foundational academic skills through systematic measurement and analysis of learner performance. In the domain of reading, PT has consistently demonstrated positive effects across a variety of learner profiles and instructional contexts (Hughes, Beverley, &amp; Whitehead, 2007; Ragnarsdóttir, 2007).</p>
+<p>Research indicates that PT is especially effective at increasing reading fluency, which is critical for reading comprehension and overall academic success (Hughes et al., 2007; Ragnarsdóttir, 2007). For example, Hughes et al.&nbsp;(2007) found that five students with reading difficulties who received PT demonstrated substantial gains in word reading fluency, outperforming peers in a treatment-as-usual condition. Similarly, researchers used multilevel modeling to synthesize findings across 13 multiple-baseline studies involving at-risk kindergarten readers, showing a statistically significant increase in correct responses per minute and maintenance of gains after intervention removal (Brosnan et al., 2016, 2018).</p>
+<p>PT has also been found effective in supporting students with disabilities, including those with autism (Ragnarsdóttir, 2007). In a case study involving an Icelandic student with autism, the combination of Direct Instruction and PT led to fluent decoding and sustained reading gains over time (Ragnarsdóttir, 2007). Other research demonstrated that caregivers could be trained to implement PT in synchronous learning environments, resulting in increased sight word identification among early learners (Dietrich &amp; Li, 2022).</p>
+<p>Beyond isolated word reading, PT has also been used to improve contextualized reading fluency and comprehension. Research found that a three-week PT intervention in Irish language learners significantly increased both isolated sight word reading and contextualized reading fluency (Mannion &amp; Griffin, 2018). Other research extended this work by integrating PT with relational language training to enhance reading comprehension outcomes, highlighting PT’s role in promoting complex verbal behavior related to text understanding (Newsome et al., 2014).</p>
+<p>Empirical studies further underscore PT’s role as a cost-effective and time-efficient intervention (Hughes et al., 2007; Griffin &amp; Murtagh, 2015). In a large-group study of Irish primary students requiring reading support, PT yielded statistically significant improvements in sight vocabulary, fluency, and comprehension scores (Griffin &amp; Murtagh, 2015). Additional research added that PT, when combined with repeated reading to a fluency criterion, helped students with disabilities make substantial progress in reading expository science texts, traditionally a difficult genre for struggling readers (Kostewicz &amp; Kubina, 2011).</p>
+<p>Overall, the precision teaching framework, grounded in frequent measurement, performance feedback, and visual analysis of growth, provides a powerful model for accelerating reading proficiency and ensuring skill retention across diverse populations and settings (Brosnan et al., 2016; Hughes et al., 2007; Dietrich &amp; Li, 2022).</p>
 </section>
+<section id="precision-teaching-and-mathematics" class="level2">
+<h2 class="anchored" data-anchor-id="precision-teaching-and-mathematics">Precision Teaching and Mathematics</h2>
+<p>Precision Teaching (PT) has proven to be a highly effective instructional strategy for developing fluency in foundational mathematics skills, including computation, fact recall, and problem-solving. PT emphasizes repeated timed practice, immediate feedback, and the use of visual data display through Standard Celeration Charts (SCC) to monitor student performance and guide instruction (Johnson &amp; Street, 2013). A growing body of research highlights the value of PT in increasing both the accuracy and speed of mathematical responding, leading to improved academic outcomes and learner confidence (Binder &amp; Watkins, 2013; Kubina &amp; Yurich, 2012).</p>
+<p>Studies have consistently shown that fluency with basic math facts enhances students’ capacity to tackle more complex mathematical problems by reducing cognitive load and freeing up working memory (Burns et al., 2016; Johnson &amp; Street, 2013). Other research demonstrated that incorporating PT into a self-regulated learning (SRL) framework significantly improved multiplication fluency in Year 5 and 6 students, with sustained gains over time and increased out-of-school practice behavior (Sleeman et al., 2019).</p>
+<p>McTiernan et al.&nbsp;(2016) conducted a randomized controlled trial (RCT) with 28 students and found significant improvements in fluency, endurance, stability, and application outcomes for those receiving PT-based instruction, compared to a control group receiving traditional math instruction. These outcomes align with the MESAG performance standards, Maintenance, Endurance, Stability, Application, and Generativity, that PT aims to achieve (Johnson &amp; Street, 2013).</p>
+<p>Further support for the efficacy of PT in mathematics is demonstrated when researchers combined PT with cross-age peer tutoring and found significant gains in math fluency among students from socioeconomically disadvantaged schools. This RCT revealed that the intervention group outperformed controls on fluency outcomes, suggesting the feasibility of low-cost, scalable PT implementations (Greene et al., 2018).</p>
+<p>PT with typically developing students in grades 5–7 who were struggling with multiplication and division, after eight weeks of daily PT sessions, students in the intervention group outperformed peers receiving typical instruction, with sustained improvement observed at follow-up (Stromgren et al., 2014). This reinforces earlier findings that PT intervention led struggling students to surpass classmates on division fluency despite starting with significantly lower baseline performance (Chiesa &amp; Robertson, 2000).</p>
+<p>Taken together, these studies illustrate how PT not only improves fluency with basic computation but also contributes to broader academic outcomes such as increased mathematical endurance, retention, and application. The consistent use of SCCs, fluency aims, and structured instructional cycles provides a replicable model for effective mathematics instruction across various settings and student populations.</p>
+</section>
+<section id="description-of-the-fit-learning-intervention" class="level2">
+<h2 class="anchored" data-anchor-id="description-of-the-fit-learning-intervention">Description of the FIT Learning Intervention</h2>
+<p>FIT Learning is an educational model that integrates principles from behavior science to deliver individualized, evidence-based instruction. Rooted in Precision Teaching, Direct Instruction, Curriculum-Based Measurement, and Relational Frame Theory, the FIT approach aims to build fluency, defined as accuracy plus speed, in core academic areas such as reading, math, writing, and logic. Each learner begins with a comprehensive skills assessment that identifies performance gaps and informs a customized curriculum. Students work one-on-one with trained learning coaches in brief, high-intensity sessions that are designed to accelerate progress. According to the organization, most learners achieve one to two years of academic growth in just 40 hours of instruction, with the goal of cultivating critical thinking, confidence, and long-term retention of skills.</p>
+<p>##Rationale for the Present Review## Despite the promise in precision teaching based academic interventions, there remains a limited body of large-scale, empirical evidence evaluating their effectiveness across diverse implementation contexts. FIT Learning, a network of learning laboratories grounded in the science of Precision Teaching and behavior analysis, delivers a standardized 40-hour instructional model aimed at accelerating academic skill development. While internal data suggest that many students make rapid gains in reading and math fluency, these findings have yet to be systematically synthesized and evaluated using rigorous meta-analytic methods.</p>
+<p>This individual participant data meta-analysis (IPD-MA) seeks to address this gap by aggregating and analyzing pre- and post-assessment outcomes from 23 FIT Learning clinics across the United States. The primary objective is to estimate the overall effect of the standardized 40-hour Precision Teaching intervention on students’ math and reading performance. Additionally, secondary research questions will explore the intervention’s differential effects on math and reading domains, the potential moderating role of baseline performance at the clinic level, and the extent to which outcomes vary across clinic sites and student grade levels.</p>
+<p>By leveraging IPD-MA methods, this review will enable more precise and nuanced estimations of intervention effects than traditional aggregate meta-analyses, supporting both external validity and hypothesis testing for effect moderators. Findings from this review will inform future implementation, scalability, and optimization of Precision Teaching interventions in applied learning settings, while contributing to the broader evidence base on individualized academic instruction.</p>
+<p>##Primary Research Question## What is the effect of a standardized 40-hour Precision Teaching intervention on students’ math and reading performance, as measured by standardized pre- and post-assessment scores, across multiple clinic implementations?</p>
+<p>##Secondary Research Questions## Secondary research questions include (a) What is the effect of the intervention on mathematics performance when analyzed separately from reading? (b) What is the effect of the intervention on reading performance when analyzed separately from mathematics? (c)Does clinic-level baseline performance moderate the effectiveness of the intervention? (d) How does the intervention’s effectiveness vary across different clinic sites? (e) Is the effect of the intervention consistent across students at different grade levels?</p>
+<p>##Methods## <em>Types of Studies</em> This review will include data from clinic sites implementing the standardized Fit Learning Precision Teaching curriculum. Eligible studies must employ a pre-post design with standardized outcome assessments administered before and after the 40-hour intervention period. Only sites with complete individual participant data will be included to facilitate the individual participant data meta-analysis approach.</p>
+<p><em>Types of Participants</em> Participants must be K-12 students (ages 5-18) who enrolled in and completed the 40-hour Precision Teaching intervention at participating Fit Learning clinics. Students across all grade levels and academic ability levels will be included to maximize generalizability of findings. No restrictions will be placed on participants’ baseline academic performance, learning disability status, or demographic characteristics.</p>
+<p><em>Types of Interventions</em> The intervention must consist of the standardized 40-hour Fit Learning Precision Teaching curriculum delivered through one-on-one instruction. The intervention must follow the established protocol including frequency-based measurement, daily timing exercises, data charting, and systematic skill progression.</p>
+<p><em>Types of Outcome Measures</em> Primary outcomes must include standardized pre- and post-intervention assessments in mathematics and/or reading. Assessments must provide continuous scale scores that allow for calculation of standardized mean change effect sizes. Both domain-specific assessments (e.g., separate math and reading measures) and comprehensive academic batteries will be included.</p>
+<p><em>Data Extraction and Management</em> Individual participant data will be obtained directly from Fit Learning clinics for all included sites. A standardized data extraction form will be developed to capture: (a) Participant characteristics (age, grade level, baseline academic performance) (b) Intervention details (duration, fidelity measures, completion status) (c) Outcome measures (pre- and post-intervention assessment scores) (d) Site characteristics (clinic location, implementation year, sample size).</p>
+<p><em>Assessment of Risk of Bias or Study Quality in Included Studies</em> Given that all included studies will employ the same pre-post design and standardized intervention protocol, traditional risk of bias tools may have limited applicability. However, study quality will be assessed using modified criteria focusing on: (a) Intervention fidelity and adherence to the standardized protocol (b) Completeness of outcome data and participant attrition (c) Standardization of assessment procedures across sites (d) Baseline characteristics of participants and potential selection bias. Two independent reviewers will conduct quality assessments, with disagreements resolved through discussion.</p>
+<p><em>Effect Size Measures</em> The primary effect size measure will be the standardized mean change, calculated as Hedges’ g corrected for small sample bias. This effect size is appropriate for single-arm pre-post designs and represents the magnitude of change from pre- to post-intervention standardized by the pooled standard deviation.</p>
+<p>For each clinic site, the standardized mean change will be calculated by taking the difference between post-intervention and pre-intervention means, dividing by the pooled standard deviation, and applying a small sample bias correction factor. The pooled standard deviation will account for the correlation between pre- and post-intervention scores, which is expected given the repeated measures design. The pre-post correlation will be estimated directly from the data at each clinic site. The small sample bias correction ensures that effect sizes are not inflated in smaller clinic samples, providing more accurate estimates across sites with varying sample sizes.</p>
+<p><em>Synthesis Methods</em> Separate meta-analyses will be conducted for mathematics and reading outcomes using random-effects models to account for expected heterogeneity across clinic sites. The meta-analysis will follow a two-stage individual participant data approach: Stage 1: Calculate standardized mean change effect sizes and standard errors for each clinic site separately for mathematics and reading outcomes. Stage 2: Meta-analyze the site-specific effect sizes using random-effects models with inverse variance weighting. Statistical heterogeneity will be assessed using Cochran’s Q test, I2 statistic, and tau-squared estimates. Forest plots will be created to visualize effect sizes and confidence intervals across sites.</p>
+<p><em>Subgroup Analyses</em> Planned subgroup analyses will examine Elementary (K-5) versus secondary (6-12) grade levels and high versus low baseline performance sites (based on median split of clinic-level baseline scores).</p>
+<p><em>Meta-regression</em> Meta-regression analyses will explore whether clinic-level baseline performance (calculated as the average baseline score across students within each clinic) moderates intervention effectiveness. Additional clinic-level moderators may include sample size and implementation year.</p>
+<p><em>Sensitivity Analyses</em> Planned sensitivity analyses will include: (a) Varying assumptions about pre-post correlations Excluding sites with high attrition rates (b) Multiple imputation for participants with missing assessment data (c) Fixed-effects versus random-effects model comparisons Results will be presented using forest plots, summary tables, and narrative synthesis describing patterns of effectiveness across sites and subgroups. All analyses will be conducted using R statistical software with the metafor package.</p>
+<p>###Refrences### Binder, C., &amp; Watkins, C. L. (2013). Precision teaching and fluency: The foundations of effective learning. Behavior Analyst Today, 14(1), 44–52. Brosnan, J., Moeyaert, M., Newsome, K. B., Healy, O., Heyvaert, M., Onghena, P., &amp; Van den Noortgate, W. (2016). Multilevel analysis of multiple-baseline data evaluating precision teaching as an intervention for improving fluency in foundational reading skills for at-risk readers. Exceptionality, 26(3), 137–161. Cavallini, F., Rossi, P. G., &amp; Potenza, A. (2010). Precision teaching and students with intellectual disabilities: A systematic review. Research in Developmental Disabilities, 31(6), 1196-1205. Dietrich, C. J., &amp; Li, A. (2022). Implementation of frequency building and precision teaching to teach sight words via synchronous learning: A case study. Behavior Analysis in Practice. Greene, I., McTiernan, A., &amp; Holloway, J. (2018). Cross-age peer tutoring and fluency-based instruction to achieve fluency with mathematics computation skills: A randomized controlled trial. Journal of Behavioral Education, 27(2), 145–171. Griffin, C. P., &amp; Murtagh, L. (2015). Increasing the sight vocabulary and reading fluency of children requiring reading support: The use of a precision teaching approach. Educational Psychology in Practice, 31(2), 186–209. Hughes, J. C., Beverley, M., &amp; Whitehead, J. (2007). Using precision teaching to increase the fluency of word reading with problem readers. European Journal of Behavior Analysis, 8(2), 221-238. Hughes, J. C., Beverley, M., &amp; Whitehead, J. (2007). Using precision teaching to increase the fluency of word reading with problem readers. European Journal of Behavior Analysis, 8(2), 221–238. Johnson, K. R., &amp; Street, E. M. (2013). From fluency to application: The Morningside model of generative instruction. Cambridge Center for Behavioral Studies. Kostewicz, D. E., &amp; Kubina, R. M. Jr.&nbsp;(2011). Building science reading fluency for students with disabilities with repeated reading to a fluency criterion. Learning Disabilities, 17(3), 89–103. Kubina, R. M., &amp; Yurich, K. L. (2012). Precision teaching: Measuring and charting behavior change. Sloan Publishing. Mannion, L., &amp; Griffin, C. (2018). Precision teaching through Irish: Effects on isolated sight word reading fluency and contextual reading fluency. Irish Educational Studies. McTiernan, A., Holloway, J., Healy, O., &amp; Hogan, M. (2016). A randomized controlled trial of the Morningside Math Facts curriculum on fluency, stability, endurance and application outcomes. Journal of Behavioral Education, 25(1), 49–68. McTiernan, A., McLaughlin, T. F., Williams, R. L., &amp; Berg, T. (2018). The effects of precision teaching on math computation skills of at-risk middle school students. Journal of Applied Behavior Analysis, 51(4), 770-778. McTiernan, A., McLaughlin, T. F., Williams, R. L., &amp; Berg, T. (2020). Effects of precision teaching and student age on math fluency. Behavior Analysis in Practice, 13(2), 364-372. Newsome, K. B., Berens, K. N., Ghezzi, P. M., Aninao, T., &amp; Newsome, W. D. (2014). Training relational language to improve reading comprehension. European Journal of Behavior Analysis, 15(2), 165–197. Ragnarsdóttir, G. A. (2007). Teaching an Icelandic student with autism to read by combining Direct Instruction and Precision Teaching. European Journal of Behavior Analysis, 8(2), 289–304. Sleeman, M., Friesen, M., Tyler-Merrick, G., &amp; Walker, L. (2019). The effects of precision teaching and self-regulated learning on early multiplication fluency. Journal of Behavioral Education, 29(2), 327–351. Stromgren, B., Berg-Mortensen, C., &amp; Tangen, L. (2014). The use of precision teaching to teach basic math facts. European Journal of Behavior Analysis, 15(2), 225–240.</p>
+
+
 </section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -501,185 +457,161 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
