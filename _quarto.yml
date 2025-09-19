@@ -11,8 +11,8 @@ website:
         href: about.qmd
       - text: "CV"
         href: CV_PalosS.pdf  
-      - href: "https://bsky.app/profile/saratessa.bsky.social"
-        text: "Bluesky"
+      - href: "https://www.santinoconsulting.com/"
+        text: "My Practice"
       - icon: github
         href: "https://github.com/saratessa"
   page-footer:
