@@ -4,6 +4,9 @@ image: profile.jpg
 about:
   template: jolla
   links:
+    - icon: bluesky
+      text: Bluesky
+      href: "https://bsky.app/profile/saratessa.bsky.social"
     - icon: github
       text: Github
       href: "https://github.com/saratessa"
