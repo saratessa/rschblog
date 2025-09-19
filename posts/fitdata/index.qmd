@@ -1,267 +1,303 @@
 ---
-title: "Exploring Precision Teaching (PT) Math pinpoints"
+title: "PROTOCOL: Individual participant data meta analysis of FIT learining 40 hour enrollment"
 author: "Saratessa"
-date: "2025-03-19"
-categories: [Precision Teaching, Math Instruction, Hierarchical Clustering, Multiple Regression]
+date: "2025-09-19"
+categories: [Precision Teaching, Math Instruction, Meta Analysis]
 ---
 
-This following post utilized data from a private precision teaching clinic in the United States. Each student in this data has a score for accuracy and fluency of math pinpoints at intake and then their score for those skills on a CBM after 40 hours of instruction.
-
-This report includes: **Sample visualizations** to understand the sample of participants. **Data reshaping** to convert the dataset into a tidy format. **Analysis for three research questions** using clustering, regression, and ANCOVA.
-
-**###Research Questions and Methods:###**
-
-1.  **What math skills, when grouped, predict other skills?**
-
-    -   First **Hierarchical clustering** is used to identify skill groupings based on similar learning patterns.
-
-2.  **What math skills predict outcomes on the CBM after 40 hours of instruction?**
-
-    -   Next **multiple regression modeling** is applied to determine predictive relationships.
-
-3.  **How do targeted versus untargeted math skills relate to CBM outcomes?**
-
-    -   **ANCOVA (Analysis of Covariance)** is used to examine differences between these skill types.
-
-Before loading the dataset, I cleaned it in a separate script to remove names and replace them with unique ID numbers for student privacy.
-
-In this project, the first step I took was to load all required R packages. For data manipulation (`tidyverse`), visualizations (`ggplot2`), clustering analysis (`cluster`), tidying model outputs (`broom`), and running regression models (`lme4`).
-
-```{r, setup, include=FALSE, echo=FALSE}
-library(tidyverse)
-library(ggplot2)
-library(cluster)
-library(broom)
-library(lme4)
-library(dplyr)
-library(viridis)
-```
-
-```{r,include=FALSE, echo=FALSE}
-file_path <- "/Users/saratessapalos/Desktop/Research/FIT learning/fitdata/data/Cleaned_Data1.csv"
-df <- read_csv(file_path)
-```
-
-Here are the visualizations of the sample participants. 
-```{r, echo=FALSE}
-# Hide code output in the post
-knitr::opts_chunk$set(echo = FALSE)
-
-### Students With vs. Without Diagnosis
-df %>% 
-  mutate(Has_Diagnosis = ifelse(Diagnosis == "None" | is.na(Diagnosis), "No Diagnosis", "Has Diagnosis")) %>%
-  count(Has_Diagnosis) %>%
-  ggplot(aes(x = Has_Diagnosis, y = n, fill = Has_Diagnosis)) +
-  geom_bar(stat = "identity", color = "black", width = 0.6) +
-  scale_fill_manual(values = c("#5DADE2", "#34495E")) +  
-  labs(title = "Students With vs. Without Diagnosis",
-       x = "Diagnosis Status",
-       y = "Count",
-       fill = "Diagnosis Status") +  # Updated legend title
-  theme_void(base_size = 16) +  # Applied theme_void() for better blending
-  theme(legend.position = "none", 
-        plot.title = element_text(size = 18, face = "bold", family = "serif", hjust = 0.5), 
-        axis.title = element_text(face = "bold", family = "serif"),
-        axis.text = element_text(family = "serif"),
-        panel.grid.major.y = element_line(color = "gray80"))  
-
-### Grade Level Distribution
-df %>%
-  filter(!is.na(`Grade Level`)) %>%
-  count(`Grade Level`) %>%
-  ggplot(aes(x = reorder(`Grade Level`, n), y = n, fill = n)) +
-  geom_bar(stat = "identity", color = "black", width = 0.6) +
-  scale_fill_gradient(low = "#85C1E9", high = "#1F618D") +  
-  labs(title = "Grade Level Distribution",
-       x = "Grade Level",
-       y = "Count",
-       fill = "Count") +  # Updated legend title
-  coord_flip() +  
-  theme_void(base_size = 16) +  
-  theme(plot.title = element_text(size = 18, face = "bold", family = "serif", hjust = 0.5),
-        axis.title = element_text(face = "bold", family = "serif"),
-        axis.text = element_text(family = "serif"),
-        legend.position = "none",
-        panel.grid.major.x = element_line(color = "gray80")) 
-
-### Diagnosis Type Count
-df %>%
-  mutate(Diagnosis_Category = case_when(
-    Diagnosis == "Mood Disorder - Anxiety (e.g. selective mutism, anxiety, GAD)" ~ "Mood Disorder",
-    Diagnosis == "Learning Disability - Speech and language - Speech delay" ~ "Learning Disability",
-    Diagnosis == "None" | is.na(Diagnosis) ~ "None",
-    TRUE ~ "Other"
-  )) %>%
-  count(Diagnosis_Category) %>%
-  ggplot(aes(x = reorder(Diagnosis_Category, n), y = n, fill = Diagnosis_Category)) +
-  geom_col(color = "black", width = 0.6) +
-  scale_fill_manual(values = c("#AED6F1", "#3498DB", "#2C3E50", "#85929E")) +  
-  labs(title = "Diagnosis Type Count",
-       x = "Diagnosis Type",
-       y = "Count",
-       fill = "Diagnosis Type") +  # Updated legend title
-  coord_flip() +
-  theme_void(base_size = 16) +  
-  theme(legend.position = "none",
-        plot.title = element_text(size = 18, face = "bold", family = "serif", hjust = 0.5),
-        axis.title = element_text(face = "bold", family = "serif"),
-        axis.text = element_text(family = "serif"),
-        panel.grid.major.x = element_line(color = "gray80"))
-
-```
+This post shares a PROTOCOL for a meta analysis that is being conducted as a student research project. It has not been peer-reviewed or formally submitted for publication.Please do not cite or distribute without permission.
 
 
-```{r, echo=FALSE}
-###BEFORE PEER REVIEW
-### Students With vs. Without Diagnosis
-df %>% 
-  mutate(Has_Diagnosis = ifelse(Diagnosis == "None" | is.na(Diagnosis), "No Diagnosis", "Has Diagnosis")) %>%
-  count(Has_Diagnosis) %>%
-  ggplot(aes(x = Has_Diagnosis, y = n, fill = Has_Diagnosis)) +
-  geom_bar(stat = "identity", color = "black", width = 0.6) +
-  scale_fill_manual(values = c("#5DADE2", "#34495E")) + 
-  labs(title = "Students With vs. Without Diagnosis",
-       x = "Diagnosis Status",
-       y = "Count") +
-  theme_minimal(base_size = 16) +  
-  theme(legend.position = "none", 
-        plot.title = element_text(size = 18, face = "bold", family = "serif", hjust = 0.5), 
-        axis.title = element_text(face = "bold", family = "serif"),
-        axis.text = element_text(family = "serif"),
-        panel.grid.major.y = element_line(color = "gray80"))  
+In the most recent National Assessment of Educational Progress (NAEP), both reading
+and mathematics scores among fourth-grade students declined significantly. Only 63% of fourth
+graders scored at or above the Basic level in reading, while 37% performed below that level
+(National Center for Education Statistics [NCES]). In mathematics, average scores dropped by
+five points in 2022 compared to 2019, reaching the lowest level since 2005 (NCES). Broader
+national data indicate that approximately 40% of students across the country are unable to read at
+a basic level, with nearly 70% of low-income fourth graders struggling with literacy (The
+National Literacy Institute, 2023).
+
+These figures reflect widespread academic challenges, the cumulative nature of academic
+skills means that early deficits in foundational abilities compound over time, creating
+increasingly larger achievement gaps that become more difficult to remediate as students
+progress through school. Students who fail to achieve basic literacy and numeracy skills are
+more likely to require special education services, experience grade retention, and special
+education education services. The need for effective, efficient interventions that can accelerate
+academic skill development is imperative.
+
+## Precision Teaching and Reading ## 
+
+Precision Teaching (PT) is a system for precisely defining and continuously measuring
+dimensional features of behavior, and analyzing performance on the Standard Celeration Chart to
+make timely and effective decisions that accelerate behavioral repertoires (Evans et al., 2021).
+PT as an instructional approach has shown benefits in developing fluency in foundational
+academic skills through systematic measurement and analysis of learner performance. In the
+domain of reading, PT has consistently demonstrated positive effects across a variety of learner
+profiles and instructional contexts (Hughes, Beverley, & Whitehead, 2007; Ragnarsdóttir, 2007).
+
+Research indicates that PT is especially effective at increasing reading fluency, which is
+critical for reading comprehension and overall academic success (Hughes et al., 2007;
+Ragnarsdóttir, 2007). For example, Hughes et al. (2007) found that five students with reading
+difficulties who received PT demonstrated substantial gains in word reading fluency,
+outperforming peers in a treatment-as-usual condition. Similarly, researchers used multilevel
+modeling to synthesize findings across 13 multiple-baseline studies involving at-risk
+kindergarten readers, showing a statistically significant increase in correct responses per minute
+and maintenance of gains after intervention removal (Brosnan et al., 2016, 2018).
+
+PT has also been found effective in supporting students with disabilities, including those
+with autism (Ragnarsdóttir, 2007). In a case study involving an Icelandic student with autism, the
+combination of Direct Instruction and PT led to fluent decoding and sustained reading gains over
+time (Ragnarsdóttir, 2007). Other research demonstrated that caregivers could be trained to
+implement PT in synchronous learning environments, resulting in increased sight word
+identification among early learners (Dietrich & Li, 2022).
+
+Beyond isolated word reading, PT has also been used to improve contextualized reading
+fluency and comprehension. Research found that a three-week PT intervention in Irish language
+learners significantly increased both isolated sight word reading and contextualized reading
+fluency (Mannion & Griffin, 2018). Other research extended this work by integrating PT with
+relational language training to enhance reading comprehension outcomes, highlighting PT's role
+in promoting complex verbal behavior related to text understanding (Newsome et al., 2014).
+
+Empirical studies further underscore PT’s role as a cost-effective and time-efficient
+intervention (Hughes et al., 2007; Griffin & Murtagh, 2015). In a large-group study of Irish
+primary students requiring reading support, PT yielded statistically significant improvements in sight vocabulary, fluency, and comprehension scores (Griffin & Murtagh, 2015). Additional
+research added that PT, when combined with repeated reading to a fluency criterion, helped
+students with disabilities make substantial progress in reading expository science texts,
+traditionally a difficult genre for struggling readers (Kostewicz & Kubina, 2011).
+
+Overall, the precision teaching framework, grounded in frequent measurement,
+performance feedback, and visual analysis of growth, provides a powerful model for accelerating
+reading proficiency and ensuring skill retention across diverse populations and settings (Brosnan
+et al., 2016; Hughes et al., 2007; Dietrich & Li, 2022). 
+
+## Precision Teaching and Mathematics ##
+Precision Teaching (PT) has proven to be a highly effective instructional strategy for
+developing fluency in foundational mathematics skills, including computation, fact recall, and
+problem-solving. PT emphasizes repeated timed practice, immediate feedback, and the use of
+visual data display through Standard Celeration Charts (SCC) to monitor student performance
+and guide instruction (Johnson & Street, 2013). A growing body of research highlights the value
+of PT in increasing both the accuracy and speed of mathematical responding, leading to
+improved academic outcomes and learner confidence (Binder & Watkins, 2013; Kubina &
+Yurich, 2012).
+
+Studies have consistently shown that fluency with basic math facts enhances students'
+capacity to tackle more complex mathematical problems by reducing cognitive load and freeing
+up working memory (Burns et al., 2016; Johnson & Street, 2013). Other research demonstrated
+that incorporating PT into a self-regulated learning (SRL) framework significantly improved
+multiplication fluency in Year 5 and 6 students, with sustained gains over time and increased
+out-of-school practice behavior (Sleeman et al., 2019).
+
+McTiernan et al. (2016) conducted a randomized controlled trial (RCT) with 28 students
+and found significant improvements in fluency, endurance, stability, and application outcomes
+for those receiving PT-based instruction, compared to a control group receiving traditional math
+instruction. These outcomes align with the MESAG performance standards, Maintenance,
+Endurance, Stability, Application, and Generativity, that PT aims to achieve (Johnson & Street,
+2013).
+
+Further support for the efficacy of PT in mathematics is demonstrated when researchers
+combined PT with cross-age peer tutoring and found significant gains in math fluency among
+students from socioeconomically disadvantaged schools. This RCT revealed that the intervention
+group outperformed controls on fluency outcomes, suggesting the feasibility of low-cost,
+scalable PT implementations (Greene et al., 2018).
+
+PT with typically developing students in grades 5–7 who were struggling with
+multiplication and division, after eight weeks of daily PT sessions, students in the intervention
+group outperformed peers receiving typical instruction, with sustained improvement observed at
+follow-up (Stromgren et al., 2014). This reinforces earlier findings that PT intervention led
+struggling students to surpass classmates on division fluency despite starting with significantly
+lower baseline performance (Chiesa & Robertson, 2000).
+
+Taken together, these studies illustrate how PT not only improves fluency with basic
+computation but also contributes to broader academic outcomes such as increased mathematical
+endurance, retention, and application. The consistent use of SCCs, fluency aims, and structured
+instructional cycles provides a replicable model for effective mathematics instruction across
+various settings and student populations.
+
+## Description of the FIT Learning Intervention ##
+FIT Learning is an educational model that integrates principles from behavior science to
+deliver individualized, evidence-based instruction. Rooted in Precision Teaching, Direct
+Instruction, Curriculum-Based Measurement, and Relational Frame Theory, the FIT approach
+aims to build fluency, defined as accuracy plus speed, in core academic areas such as reading,
+math, writing, and logic. Each learner begins with a comprehensive skills assessment that
+identifies performance gaps and informs a customized curriculum. Students work one-on-one
+with trained learning coaches in brief, high-intensity sessions that are designed to accelerate
+progress. According to the organization, most learners achieve one to two years of academic
+growth in just 40 hours of instruction, with the goal of cultivating critical thinking, confidence,
+and long-term retention of skills.
+
+##Rationale for the Present Review##
+Despite the promise in precision teaching based academic interventions, there remains a
+limited body of large-scale, empirical evidence evaluating their effectiveness across diverse
+implementation contexts. FIT Learning, a network of learning laboratories grounded in the
+science of Precision Teaching and behavior analysis, delivers a standardized 40-hour
+instructional model aimed at accelerating academic skill development. While internal data
+suggest that many students make rapid gains in reading and math fluency, these findings have yet
+to be systematically synthesized and evaluated using rigorous meta-analytic methods.
+
+This individual participant data meta-analysis (IPD-MA) seeks to address this gap by
+aggregating and analyzing pre- and post-assessment outcomes from 23 FIT Learning clinics
+across the United States. The primary objective is to estimate the overall effect of the
+standardized 40-hour Precision Teaching intervention on students’ math and reading
+performance. Additionally, secondary research questions will explore the intervention’s differential effects on math and reading domains, the potential moderating role of baseline
+performance at the clinic level, and the extent to which outcomes vary across clinic sites and
+student grade levels.
+
+By leveraging IPD-MA methods, this review will enable more precise and nuanced
+estimations of intervention effects than traditional aggregate meta-analyses, supporting both
+external validity and hypothesis testing for effect moderators. Findings from this review will
+inform future implementation, scalability, and optimization of Precision Teaching interventions
+in applied learning settings, while contributing to the broader evidence base on individualized
+academic instruction.
+
+##Primary Research Question##
+What is the effect of a standardized 40-hour Precision Teaching intervention on students’
+math and reading performance, as measured by standardized pre- and post-assessment scores,
+across multiple clinic implementations?
+
+##Secondary Research Questions##
+Secondary research questions include (a) What is the effect of the intervention on
+mathematics performance when analyzed separately from reading? (b) What is the effect of the
+intervention on reading performance when analyzed separately from mathematics? (c)Does
+clinic-level baseline performance moderate the effectiveness of the intervention? (d) How does
+the intervention’s effectiveness vary across different clinic sites? (e) Is the effect of the
+intervention consistent across students at different grade levels?
+
+##Methods##
+_Types of Studies_
+This review will include data from clinic sites implementing the standardized Fit
+Learning Precision Teaching curriculum. Eligible studies must employ a pre-post design with standardized outcome assessments administered before and after the 40-hour intervention period.
+Only sites with complete individual participant data will be included to facilitate the individual
+participant data meta-analysis approach.
+
+_Types of Participants_
+Participants must be K-12 students (ages 5-18) who enrolled in and completed the
+40-hour Precision Teaching intervention at participating Fit Learning clinics. Students across all
+grade levels and academic ability levels will be included to maximize generalizability of
+findings. No restrictions will be placed on participants' baseline academic performance, learning
+disability status, or demographic characteristics.
+
+_Types of Interventions_
+The intervention must consist of the standardized 40-hour Fit Learning Precision
+Teaching curriculum delivered through one-on-one instruction. The intervention must follow the
+established protocol including frequency-based measurement, daily timing exercises, data
+charting, and systematic skill progression.
+
+_Types of Outcome Measures_
+Primary outcomes must include standardized pre- and post-intervention assessments in
+mathematics and/or reading. Assessments must provide continuous scale scores that allow for
+calculation of standardized mean change effect sizes. Both domain-specific assessments (e.g.,
+separate math and reading measures) and comprehensive academic batteries will be included.
+
+_Data Extraction and Management_
+Individual participant data will be obtained directly from Fit Learning clinics for all included
+sites. A standardized data extraction form will be developed to capture: (a) Participant
+characteristics (age, grade level, baseline academic performance) (b) Intervention details (duration, fidelity measures, completion status) (c) Outcome measures (pre- and
+post-intervention assessment scores) (d) Site characteristics (clinic location, implementation
+year, sample size).
+
+_Assessment of Risk of Bias or Study Quality in Included Studies_
+Given that all included studies will employ the same pre-post design and standardized
+intervention protocol, traditional risk of bias tools may have limited applicability. However,
+study quality will be assessed using modified criteria focusing on: (a) Intervention fidelity and
+adherence to the standardized protocol (b) Completeness of outcome data and participant
+attrition (c) Standardization of assessment procedures across sites (d) Baseline characteristics of
+participants and potential selection bias. Two independent reviewers will conduct quality
+assessments, with disagreements resolved through discussion.
+
+_Effect Size Measures_
+The primary effect size measure will be the standardized mean change, calculated as
+Hedges' g corrected for small sample bias. This effect size is appropriate for single-arm pre-post
+designs and represents the magnitude of change from pre- to post-intervention standardized by
+the pooled standard deviation.
+
+For each clinic site, the standardized mean change will be calculated by taking the
+difference between post-intervention and pre-intervention means, dividing by the pooled
+standard deviation, and applying a small sample bias correction factor. The pooled standard
+deviation will account for the correlation between pre- and post-intervention scores, which is
+expected given the repeated measures design. The pre-post correlation will be estimated directly
+from the data at each clinic site. The small sample bias correction ensures that effect sizes are not inflated in smaller clinic samples, providing more accurate estimates across sites with varying
+sample sizes.
+
+_Synthesis Methods_
+Separate meta-analyses will be conducted for mathematics and reading outcomes using
+random-effects models to account for expected heterogeneity across clinic sites. The
+meta-analysis will follow a two-stage individual participant data approach: Stage 1: Calculate
+standardized mean change effect sizes and standard errors for each clinic site separately for
+mathematics and reading outcomes. Stage 2: Meta-analyze the site-specific effect sizes using
+random-effects models with inverse variance weighting.
+Statistical heterogeneity will be assessed using Cochran's Q test, I2 statistic, and
+tau-squared estimates. Forest plots will be created to visualize effect sizes and confidence
+intervals across sites.
+
+_Subgroup Analyses_
+Planned subgroup analyses will examine Elementary (K-5) versus secondary (6-12) grade
+levels and high versus low baseline performance sites (based on median split of clinic-level
+baseline scores).
+
+_Meta-regression_
+Meta-regression analyses will explore whether clinic-level baseline performance
+(calculated as the average baseline score across students within each clinic) moderates
+intervention effectiveness. Additional clinic-level moderators may include sample size and
+implementation year.
+
+_Sensitivity Analyses_
+Planned sensitivity analyses will include: (a) Varying assumptions about pre-post
+correlations Excluding sites with high attrition rates (b) Multiple imputation for participants with
+missing assessment data (c) Fixed-effects versus random-effects model comparisons Results will
+be presented using forest plots, summary tables, and narrative synthesis describing patterns of
+effectiveness across sites and subgroups. All analyses will be conducted using R statistical
+software with the metafor package.
 
 
-### Grade Level Distribution
-df %>%
-  filter(!is.na(`Grade Level`)) %>%
-  count(`Grade Level`) %>%
-  ggplot(aes(x = reorder(`Grade Level`, n), y = n, fill = n)) +
-  geom_bar(stat = "identity", color = "black", width = 0.6) +
-  scale_fill_gradient(low = "#85C1E9", high = "#1F618D") +  # Soft-to-dark blue gradient
-  labs(title = "Grade Level Distribution",
-       x = "Grade Level",
-       y = "Count") +
-  coord_flip() +  
-  theme_minimal(base_size = 16) +  
-  theme(plot.title = element_text(size = 18, face = "bold", family = "serif", hjust = 0.5),
-        axis.title = element_text(face = "bold", family = "serif"),
-        axis.text = element_text(family = "serif"),
-        legend.position = "none",
-        panel.grid.major.x = element_line(color = "gray80")) 
-
-
-### Diagnosis Type Count
-df %>%
-  mutate(Diagnosis_Category = case_when(
-    Diagnosis == "Mood Disorder - Anxiety (e.g. selective mutism, anxiety, GAD)" ~ "Mood Disorder",
-    Diagnosis == "Learning Disability - Speech and language - Speech delay" ~ "Learning Disability",
-    Diagnosis == "None" | is.na(Diagnosis) ~ "None",
-    TRUE ~ "Other"
-  )) %>%
-  count(Diagnosis_Category) %>%
-  ggplot(aes(x = reorder(Diagnosis_Category, n), y = n, fill = Diagnosis_Category)) +
-  geom_col(color = "black", width = 0.6) +
-  scale_fill_manual(values = c("#AED6F1", "#3498DB", "#2C3E50", "#85929E")) +  # Softer blues & gray
-  labs(title = "Diagnosis Type Count",
-       x = "Diagnosis Type",
-       y = "Count") +
-  coord_flip() +
-  theme_minimal(base_size = 16) +  
-  theme(legend.position = "none",
-        plot.title = element_text(size = 18, face = "bold", family = "serif", hjust = 0.5),
-        axis.title = element_text(face = "bold", family = "serif"),
-        axis.text = element_text(family = "serif"),
-        panel.grid.major.x = element_line(color = "gray80"))
-```
-
-## Reshape Data to Tidy Format
-
-[edit this now that changes were made\]I reshaped the dataset to a "tidy" format, where each row represents: Participant_ID, Grade Level, Diagnosis, Skill, Measure\` (Intake Accuracy, Post Fluency, etc.), Score. I converted categorical variables to factors to avoid regression errors. And I removed levels with only one category to prevent contrast errors in regression.
-
-```{r, include=FALSE, echo=FALSE, warning=FALSE}
-# Start with clean data (row 4 onwards)
-clean_df <- df[4:nrow(df), ]
-
-# Step 2: Create proper column names by combining rows 1 and 2
-col_names_skill <- as.character(unlist(df[1, ]))
-col_names_assessment <- as.character(unlist(df[2, ]))
-
-# Fix any NA or empty values in column names
-col_names_skill <- ifelse(is.na(col_names_skill) | col_names_skill == "", paste0("Column_", 1:length(col_names_skill)), col_names_skill)
-col_names_assessment <- ifelse(is.na(col_names_assessment) | col_names_assessment == "", "Unknown", col_names_assessment)
-
-# Create combined names for all columns
-full_col_names <- vector("character", length(col_names_skill))
-for(i in 1:length(col_names_skill)) {
-  if(i <= 3) {
-    # Keep the original names for the first three columns
-    full_col_names[i] <- col_names_skill[i]
-  } else {
-    # Combine skill and assessment type for data columns
-    full_col_names[i] <- paste(col_names_skill[i], col_names_assessment[i], sep = "_")
-  }
-}
-
-# Make sure all column names are unique
-if(any(duplicated(full_col_names))) {
-  # Add a suffix to duplicated names
-  dups <- which(duplicated(full_col_names))
-  for(i in dups) {
-    full_col_names[i] <- paste0(full_col_names[i], "_", i)
-  }
-}
-
-# Assign the new column names
-colnames(clean_df) <- full_col_names
-
-# Step 3: Convert to tidy format
-tidy_df <- clean_df %>%
-  # Convert character columns to numeric (except first 3 columns)
-  mutate(across(4:ncol(.), ~as.numeric(as.character(.)))) %>%
-  # Convert to long format
-  pivot_longer(
-    cols = 4:ncol(.),
-    names_to = "Skill_Measure",
-    values_to = "Score"
-  ) %>%
-  # Split Skill_Measure into Skill and Measure
-  # Use a more flexible pattern to handle different formats
-  separate(Skill_Measure, 
-           into = c("Skill", "Measure"),
-           sep = "_(?=(Intake|Post|Targeted)($|_))",  # Split before Intake, Post, or Targeted
-           fill = "right") %>%  # Handle any missing values
-  # Remove any trailing/leading whitespace
-  mutate(
-    Skill = trimws(Skill),
-    Measure = trimws(Measure)
-  )
-```
-
-```{r, echo=FALSE}
-# Check the number of NAs in the Score column
-na_count <- sum(is.na(tidy_df$Score))
-total_count <- nrow(tidy_df)
-na_percentage <- (na_count / total_count) * 100
-
-# Print summary
-cat("Total rows:", total_count, "\n")
-cat("NA values in Score:", na_count, "\n")
-cat("Percentage NA:", na_percentage, "%\n")
-
-# See what the tidy data looks like
-head(tidy_df)
-```
-
-////// \## Answer Research Questions
-
-### **Q1: What math skills, when grouped, predict other skills?**
-
-to address this I used a **Correlation analysis** to identify skills that **improve together**. Then I did **Association rule mining** to find patterns where mastering one skill predicts mastery of another. I then created the following visualizations: a **correlation heatmap** and **association rule graph**.
-
-```{r, echo=FALSE}
-# Create a correlation matrix for skill scores
-
-
-# Visualize correlation matrix
-
-```
+###Refrences###
+Binder, C., & Watkins, C. L. (2013). Precision teaching and fluency: The foundations of effective
+learning. Behavior Analyst Today, 14(1), 44–52.
+Brosnan, J., Moeyaert, M., Newsome, K. B., Healy, O., Heyvaert, M., Onghena, P., & Van den
+Noortgate, W. (2016). Multilevel analysis of multiple-baseline data evaluating precision
+teaching as an intervention for improving fluency in foundational reading skills for at-risk
+readers. Exceptionality, 26(3), 137–161.
+Cavallini, F., Rossi, P. G., & Potenza, A. (2010). Precision teaching and students with intellectual
+disabilities: A systematic review. Research in Developmental Disabilities, 31(6),
+1196-1205.
+Dietrich, C. J., & Li, A. (2022). Implementation of frequency building and precision teaching to
+teach sight words via synchronous learning: A case study. Behavior Analysis in Practice.
+Greene, I., McTiernan, A., & Holloway, J. (2018). Cross-age peer tutoring and fluency-based
+instruction to achieve fluency with mathematics computation skills: A randomized
+controlled trial. Journal of Behavioral Education, 27(2), 145–171.
+Griffin, C. P., & Murtagh, L. (2015). Increasing the sight vocabulary and reading fluency of
+children requiring reading support: The use of a precision teaching approach. Educational
+Psychology in Practice, 31(2), 186–209.
+Hughes, J. C., Beverley, M., & Whitehead, J. (2007). Using precision teaching to increase the
+fluency of word reading with problem readers. European Journal of Behavior Analysis,
+8(2), 221-238.
+Hughes, J. C., Beverley, M., & Whitehead, J. (2007). Using precision teaching to increase the
+fluency of word reading with problem readers. European Journal of Behavior Analysis,
+8(2), 221–238.
+Johnson, K. R., & Street, E. M. (2013). From fluency to application: The Morningside model of
+generative instruction. Cambridge Center for Behavioral Studies.
+Kostewicz, D. E., & Kubina, R. M. Jr. (2011). Building science reading fluency for students with
+disabilities with repeated reading to a fluency criterion. Learning Disabilities, 17(3),
+89–103.
+Kubina, R. M., & Yurich, K. L. (2012). Precision teaching: Measuring and charting behavior
+change. Sloan Publishing.
+Mannion, L., & Griffin, C. (2018). Precision teaching through Irish: Effects on isolated sight
+word reading fluency and contextual reading fluency. Irish Educational Studies.
+McTiernan, A., Holloway, J., Healy, O., & Hogan, M. (2016). A randomized controlled trial of
+the Morningside Math Facts curriculum on fluency, stability, endurance and application
+outcomes. Journal of Behavioral Education, 25(1), 49–68.
+McTiernan, A., McLaughlin, T. F., Williams, R. L., & Berg, T. (2018). The effects of precision
+teaching on math computation skills of at-risk middle school students. Journal of Applied
+Behavior Analysis, 51(4), 770-778.
+McTiernan, A., McLaughlin, T. F., Williams, R. L., & Berg, T. (2020). Effects of precision
+teaching and student age on math fluency. Behavior Analysis in Practice, 13(2), 364-372.
+Newsome, K. B., Berens, K. N., Ghezzi, P. M., Aninao, T., & Newsome, W. D. (2014). Training
+relational language to improve reading comprehension. European Journal of Behavior
+Analysis, 15(2), 165–197.
+Ragnarsdóttir, G. A. (2007). Teaching an Icelandic student with autism to read by combining
+Direct Instruction and Precision Teaching. European Journal of Behavior Analysis, 8(2),
+289–304.
+Sleeman, M., Friesen, M., Tyler-Merrick, G., & Walker, L. (2019). The effects of precision
+teaching and self-regulated learning on early multiplication fluency. Journal of
+Behavioral Education, 29(2), 327–351.
+Stromgren, B., Berg-Mortensen, C., & Tangen, L. (2014). The use of precision teaching to teach
+basic math facts. European Journal of Behavior Analysis, 15(2), 225–240.
