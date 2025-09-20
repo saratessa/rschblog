@@ -53,11 +53,17 @@ This individual participant data meta-analysis (IPD-MA) seeks to address this ga
 
 By leveraging IPD-MA methods, this review will enable more precise and nuanced estimations of intervention effects than traditional aggregate meta-analyses, supporting both external validity and hypothesis testing for effect moderators. Findings from this review will inform future implementation, scalability, and optimization of Precision Teaching interventions in applied learning settings, while contributing to the broader evidence base on individualized academic instruction.
 
-**Primary Research Question** What is the effect of a standardized 40-hour Precision Teaching intervention on students’ math and reading performance, as measured by standardized pre- and post-assessment scores, across multiple clinic implementations?
+**Primary Research Question**
 
-**Secondary Research Questions** Secondary research questions include (a) What is the effect of the intervention on mathematics performance when analyzed separately from reading? (b) What is the effect of the intervention on reading performance when analyzed separately from mathematics? (c)Does clinic-level baseline performance moderate the effectiveness of the intervention? (d) How does the intervention’s effectiveness vary across different clinic sites? (e) Is the effect of the intervention consistent across students at different grade levels?
+What is the effect of a standardized 40-hour Precision Teaching intervention on students’ math and reading performance, as measured by standardized pre- and post-assessment scores, across multiple clinic implementations?
 
-**Methods** *Types of Studies* This review will include data from clinic sites implementing the standardized Fit Learning Precision Teaching curriculum. Eligible studies must employ a pre-post design with standardized outcome assessments administered before and after the 40-hour intervention period. Only sites with complete individual participant data will be included to facilitate the individual participant data meta-analysis approach.
+**Secondary Research Questions**
+
+Secondary research questions include (a) What is the effect of the intervention on mathematics performance when analyzed separately from reading? (b) What is the effect of the intervention on reading performance when analyzed separately from mathematics? (c)Does clinic-level baseline performance moderate the effectiveness of the intervention? (d) How does the intervention’s effectiveness vary across different clinic sites? (e) Is the effect of the intervention consistent across students at different grade levels?
+
+**Methods**
+
+*Types of Studies* This review will include data from clinic sites implementing the standardized Fit Learning Precision Teaching curriculum. Eligible studies must employ a pre-post design with standardized outcome assessments administered before and after the 40-hour intervention period. Only sites with complete individual participant data will be included to facilitate the individual participant data meta-analysis approach.
 
 *Types of Participants* Participants must be K-12 students (ages 5-18) who enrolled in and completed the 40-hour Precision Teaching intervention at participating Fit Learning clinics. Students across all grade levels and academic ability levels will be included to maximize generalizability of findings. No restrictions will be placed on participants' baseline academic performance, learning disability status, or demographic characteristics.
 
